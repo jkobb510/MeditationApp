@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+}
+
+.container {
+    text-align: center;
+}
+
+#timer-circle {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#time {
+    font-size: 48px;
+}
+
+.controls button {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.controls button:hover {
+    background-color: #fff;
+    color: #000;
+}
+.icon-reset {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-button {
+    width: 20px; /* Set consistent button width */
+    height: 20px; /* Set consistent button height */
+    padding: 0; /* Remove padding */
+}
+
+.icon-pause {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.icon{
+    width: 24px;
+    height: 24px;
+}
+.invert-button svg {
+        fill: #fff; /* Default fill color */
+        transition: fill 0.3s;
+}
+.invert-button:hover svg {
+        fill: #000; /* Inverted fill color */
+}
+.icon-button {
+    width: 66px; /* Set a consistent width */
+    height:50px; /* Set a consistent height */
+    padding: 0; /* Remove extra padding */
+}
+
+.icon-button svg {
+    fill: #fff; /* Default fill color */
+    transition: fill 0.3s;
+}
+
+.icon-button:hover svg {
+    fill: #000; /* Hover fill color */
+}
+#logContainer {
+    margin-top: 60px;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#logContainer table {
+    border-collapse: collapse;
+    width: 80%;
+}
+
+#logContainer th, #logContainer td {
+    border: 1px solid #ffffff;
+    padding: 5px;
+    text-align: center;
+    color: #ffffff;
+}
+#logContainer td {
+    width: 40px;
+    white-space: nowrap;
+
+}
