@@ -20,6 +20,13 @@ module.exports = {
         test: /\.css$/, // Add this rule for CSS files
         use: ['style-loader', 'css-loader'], // Process CSS with style-loader and css-loader
       },
+      {
+                test: /\.(mp3|wav)$/, // Rule for audio files
+        type: 'asset/resource', // Use asset/resource for Webpack 5
+        generator: {
+          filename: 'media/[name].[hash][ext]', // Output location and naming for audio files
+        },
+      }
     ],
   },
   resolve: {
