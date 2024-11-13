@@ -13,7 +13,6 @@ function App() {
   const handleReset = () => {
     if (time < 600) saveLog(formattedTime);
     resetTimer();
-    audioRef.current.play();
   };
 
   return (
@@ -22,7 +21,6 @@ function App() {
       <Controls isRunning={isRunning} onStartPause={startPauseTimer} onReset={handleReset} />
       <LogContainer logs={logs} />
         <audio ref={audioRef} src={chimeSound} />
-
     </div>
   );
 }

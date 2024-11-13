@@ -8,13 +8,13 @@ const useTimer = (initialTime = 600) => {
 
   const startPauseTimer = useCallback(() => {
     if (time > 0)
+        if (time === initialTimeRef.current && !isRunning) {
+            audioRef.current.play();
+        }
         setIsRunning((prev) => !prev);
-  }, [time]);
+  }, [time], isRunning);
 
   const resetTimer = useCallback(() => {
-    if (time < initialTimeRef.current) {
-      audioRef.current.play();
-    }
     setTime(initialTimeRef.current);
     setIsRunning(false);
   }, [time, initialTimeRef]);
