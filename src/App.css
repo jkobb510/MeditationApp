@@ -19,17 +19,23 @@ body {
     text-align: center;
 }
 
-#timer-circle {
-    width: 300px;
-    height: 300px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
+#timerCircle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform: rotate(-90deg); /* Start from top */
+  font-size: 2rem;
+  color: #fff;
 }
+
+#timerCircle span {
+  z-index: 1;
+}
+
 
 #time {
     font-size: 48px;
