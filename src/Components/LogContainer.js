@@ -16,7 +16,7 @@ const LogContainer = ({ logs }) => {
             <tr key={index}>
               <td>{log.date}</td>
               <td>{log.time}</td>
-              <td>{log.timeRecorded}</td>
+              <td>{log.timeRecorded || '00:00' }</td>
             </tr>
           ))}
         </tbody>

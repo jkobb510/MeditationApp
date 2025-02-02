@@ -1,6 +1,5 @@
 * {
     margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -9,16 +8,33 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     max-height: 100%;
     background-color: #000;
     color: #fff;
 }
 
 .container {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #000;
+  text-align: center;
+  margin: 20px;
 }
-
+#innerCircle{
+  width: 290px;
+  height: 290px;
+  background-color: #000000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 2rem;
+}
 #timerCircle {
   width: 300px;
   height: 300px;
@@ -27,15 +43,19 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  transform: rotate(-90deg); /* Start from top */
   font-size: 2rem;
   color: #fff;
+  transform: rotate(-90deg); /* This makes the timer start from the top */
+  margin-bottom: 20px;
 }
 
 #timerCircle span {
   z-index: 1;
 }
 
+#timerCircle > * {
+  transform: rotate(90deg); /* This keeps the text oriented correctly */
+}
 
 #time {
     font-size: 48px;

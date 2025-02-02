@@ -39,13 +39,15 @@ const useTimer = (initialTime = 600) => {
 
   // Calculate animation progress
   const progress = ((initialTime - time) / initialTime) * 100;
-const animateStyle = {
-  background: `conic-gradient(#cccccc ${progress}%, #ffffff ${progress}%)`,
-};
+  const animateStyle = {
+    background: `conic-gradient(rgb(185, 144, 20) ${progress}%,rgb(255, 255, 255) ${progress}%)`,
+  };
+  const formattedTime = `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, '0')}`;
 
   return {
     time,
     isRunning,
+    formattedTime,
     startPauseTimer,
     resetTimer,
     animateStyle,

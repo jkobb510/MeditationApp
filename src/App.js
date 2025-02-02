@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import LogContainer from './LogContainer';
-import Controls from './Controls';
-import TimerDisplay from './TimerDisplay';
+import LogContainer from './Components/LogContainer';
+import Controls from './Components/Controls';
+import TimerDisplay from './Components/TimerDisplay';
 import useTimer from './hooks/useTimer';
 import useLogs from './hooks/useLogs';
 import chimeSound from './chalicechime-65472.mp3';
@@ -12,16 +12,21 @@ function App() {
   const { logs, saveLog } = useLogs();
 
   const handleReset = () => {
-    if (time < 600) saveLog(formattedTime);
+    if (time < 600) {
+      console.log('Saving log with time:', formattedTime);
+      saveLog(formattedTime);
+    }
     resetTimer();
   };
 
   return (
     <div className="container">
       <div id="timerCircle" style={animateStyle}>
-        <span>{formattedTime}</span>
+        <div id="innerCircle">
+            <TimerDisplay time={time} formattedTime={formattedTime} />
+        </div>
+
       </div>
-      <TimerDisplay time={time} formattedTime={formattedTime} />
       <Controls isRunning={isRunning} onStartPause={startPauseTimer} onReset={handleReset} />
       <LogContainer logs={logs} />
       <audio ref={audioRef} src={chimeSound} />
