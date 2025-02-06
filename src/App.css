@@ -24,17 +24,6 @@ body {
   text-align: center;
   margin: 20px;
 }
-#innerCircle{
-  width: 290px;
-  height: 290px;
-  background-color: #000000;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  font-size: 2rem;
-}
 #timerCircle {
   width: 300px;
   height: 300px;
@@ -45,17 +34,26 @@ body {
   position: relative;
   font-size: 2rem;
   color: #fff;
-  transform: rotate(-90deg); /* This makes the timer start from the top */
   margin-bottom: 20px;
+  border: 5px solid rgba(255, 255, 255, 0.3); /* Keeps static border */
 }
+
+#innerCircle {
+  width: 280px;
+  height: 280px;
+  background-color: #000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
 
 #timerCircle span {
   z-index: 1;
 }
 
-#timerCircle > * {
-  transform: rotate(90deg); /* This keeps the text oriented correctly */
-}
 
 #time {
     font-size: 48px;
@@ -145,4 +143,10 @@ body {
     width: 40px;
     white-space: nowrap;
 
+}
+
+.warning {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 30px;
 }

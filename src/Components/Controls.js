@@ -1,6 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * React component for rendering start/pause and reset controls.
+ *
+ * The component is passed two props: `isRunning` and `onStartPause` and `onReset`.
+ * `isRunning` is a boolean indicating whether the timer is currently running.
+ * `onStartPause` is a function to start or pause the timer, and `onReset` is a function to reset the timer.
+ *
+ * The component renders two buttons. The first button is a reset button, and the second button is a start/pause button.
+ * The start/pause button will render a play icon if the timer is not running, and a pause icon if the timer is running.
+ * Clicking the start/pause button will start or pause the timer by calling the `onStartPause` prop.
+ * Clicking the reset button will reset the timer by calling the `onReset` prop.
+ *
+ * The component should be rendered within a container element with the class "controls".
+ */
 const Controls = ({ isRunning, onStartPause, onReset }) => {
   const renderPlayIcon = () => (
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">

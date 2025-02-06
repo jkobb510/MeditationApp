@@ -6,42 +6,34 @@ const useTimer = () => {
   const audioRef = useRef(null);
 
   const startPauseTimer = useCallback(() => {
-    if (time > 0) {
-      setIsRunning((prev) => {
-        const newIsRunning = !prev;
+    setIsRunning((prev) => {
+      const newIsRunning = !prev;
 
-        // Play audio only when starting the timer
-        if (newIsRunning && time === 0) {
-          audioRef.current?.play();
-        }
+      // Play audio only when starting the timer
+      if (newIsRunning && time === 0) {
+        audioRef.current?.play();
+      }
 
-        return newIsRunning;
-      });
-    }
+      return newIsRunning;
+    });
   }, [time]);
-   
+
   const resetTimer = useCallback(() => {
     setTime(0);
     setIsRunning(false);
   }, []);
 
   useEffect(() => {
-    if (!isRunning || time === 0) {
-      return;
-    }
+    if (!isRunning) return;
 
     const timer = setInterval(() => {
-      setTime((prevTime) => prevTime - 1);
+      setTime((prevTime) => prevTime + 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isRunning, time]);
+  }, [isRunning]);
 
-  // Calculate animation progress
-  const progress = (time % 60) / 60 * 100;
-  const animateStyle = {
-    background: `conic-gradient(rgb(26, 26, 26) ${progress}%,rgb(255, 255, 255) ${progress}%)`,
-  };
+  // Keep MM:SS format
   const formattedTime = `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, '0')}`;
 
   return {
@@ -50,7 +42,6 @@ const useTimer = () => {
     formattedTime,
     startPauseTimer,
     resetTimer,
-    animateStyle,
     audioRef,
   };
 };
