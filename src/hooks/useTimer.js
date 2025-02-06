@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-const useTimer = (initialTime = 600) => {
-  const [time, setTime] = useState(initialTime);
+const useTimer = () => {
+  const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const audioRef = useRef(null);
 
@@ -11,19 +11,19 @@ const useTimer = (initialTime = 600) => {
         const newIsRunning = !prev;
 
         // Play audio only when starting the timer
-        if (newIsRunning && time === initialTime) {
+        if (newIsRunning && time === 0) {
           audioRef.current?.play();
         }
 
         return newIsRunning;
       });
     }
-  }, [time, initialTime]);
+  }, [time]);
    
   const resetTimer = useCallback(() => {
-    setTime(initialTime);
+    setTime(0);
     setIsRunning(false);
-  }, [initialTime]);
+  }, []);
 
   useEffect(() => {
     if (!isRunning || time === 0) {
@@ -38,9 +38,9 @@ const useTimer = (initialTime = 600) => {
   }, [isRunning, time]);
 
   // Calculate animation progress
-  const progress = ((initialTime - time) / initialTime) * 100;
+  const progress = (time % 60) / 60 * 100;
   const animateStyle = {
-    background: `conic-gradient(rgb(185, 144, 20) ${progress}%,rgb(255, 255, 255) ${progress}%)`,
+    background: `conic-gradient(rgb(26, 26, 26) ${progress}%,rgb(255, 255, 255) ${progress}%)`,
   };
   const formattedTime = `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, '0')}`;
 

@@ -11,13 +11,16 @@ function App() {
   const { time, isRunning, formattedTime, startPauseTimer, resetTimer, audioRef, animateStyle } = useTimer(600);
   const { logs, saveLog } = useLogs();
 
-  const handleReset = () => {
-    if (time < 600) {
-      console.log('Saving log with time:', formattedTime);
-      saveLog(formattedTime);
-    }
-    resetTimer();
-  };
+const handleReset = () => {
+  if (time >= 60) {  // Ensures session is at least 1 minute before logging
+    console.log('Saving log with time:', formattedTime);
+    saveLog(formattedTime);
+  } else {
+    setWarning('Session must be at least 1 minute to be logged.');
+  }
+  resetTimer();
+};
+
 
   return (
     <div className="container">
