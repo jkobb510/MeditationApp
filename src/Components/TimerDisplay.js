@@ -9,8 +9,10 @@ const TimerDisplay = ({ time }) => {
   };
 
   return (
-    <div id="timer-circle">
-      <span id="time">{formatTime()}</span>
+    <div id="timerCircle">
+      <div id="innerCircle">
+        <span id="time">{formatTime()}</span>
+      </div>
     </div>
   );
 };

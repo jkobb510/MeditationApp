@@ -1,50 +1,80 @@
-import React, { useState } from 'react';
-import './App.css';
-import LogContainer from './Components/LogContainer';
-import Controls from './Components/Controls';
-import TimerDisplay from './Components/TimerDisplay';
-import useTimer from './hooks/useTimer';
-import useLogs from './hooks/useLogs';
-import chimeSound from './chalicechime-65472.mp3';
+import React, { useState } from "react";
+import "./App.css";
+import LogContainer from "./Components/LogContainer";
+import Controls from "./Components/Controls";
+import TimerDisplay from "./Components/TimerDisplay";
+import useTimer from "./hooks/useTimer";
+import useLogs from "./hooks/useLogs";
+import chimeSound from "./chalicechime-65472.mp3";
+import audioOnImg from "./audioOn.png";
+import audioOffImg from "./audioOff.png";
 
 function App() {
-  const [warning, setWarning] = useState('');
-  const { time, isRunning, formattedTime, startPauseTimer, resetTimer, audioRef } = useTimer();
+  const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs();
+  const [isAudioOn, setIsAudioOn] = useState(true);
+  const [pendingUnmute, setPendingUnmute] = useState(false); // Track pending unmute state
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const clearWarning = () => {
-    if (warning) setWarning(''); // ✅ Clears the warning only if it exists
+  const handleLogSession = () => {
+    if (time >= 60) {
+      saveLog(time);
+      return true;
+    }
+    return false;
   };
 
-  const handleStartPause = () => {
-    clearWarning(); // ✅ Clicking Play/Pause always clears the warning
-    startPauseTimer();
+  const toggleAudio = () => {
+    setIsAudioOn((prevIsAudioOn) => {
+      const newIsAudioOn = !prevIsAudioOn;
+      if (audioRef.current) {
+        if (!newIsAudioOn) {
+          audioRef.current.muted = true;
+          setPendingUnmute(false);
+        } else if (isRunning) {
+          setPendingUnmute(true);
+        } else {
+          audioRef.current.muted = false;
+        }
+      }
+      return newIsAudioOn;
+    });
   };
 
   const handleReset = () => {
-    if (warning) {
-      clearWarning(); // ✅ Clicking Reset again clears the warning
-    } else if (time >= 60) {  
-      console.log('Saving log with time:', formattedTime);
-      saveLog(formattedTime);
-      clearWarning(); // ✅ Clears warning when saving valid session
-    } else {
-      setWarning('Session must be at least 1 minute to be logged.'); // ✅ Shows warning if session too short
-    }
     resetTimer();
+    if (pendingUnmute) {
+      setIsAudioOn(true);
+      if (audioRef.current) {
+        audioRef.current.muted = false;
+      }
+      setPendingUnmute(false);
+    }
   };
 
   return (
     <div className="container">
-      {warning && <p className="warning">{warning}</p>} 
-      <div id="timerCircle">
-        <div id="innerCircle">
-          <TimerDisplay time={time} formattedTime={formattedTime} />
-        </div>
+      <div className="top-right">
+        <button className="button-icon" onClick={toggleAudio}>
+          <img src={isAudioOn ? audioOnImg : audioOffImg} alt="Toggle Sound" width="24" height="24" />
+        </button>
       </div>
-      <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
-      <LogContainer logs={logs} />
-      <audio ref={audioRef} src={chimeSound} />
+      <TimerDisplay time={time} />
+      <Controls
+        isRunning={isRunning}
+        onStartPause={startPauseTimer}
+        onReset={handleReset}
+        onLogSession={handleLogSession}
+        isAudioOn={isAudioOn}
+        toggleAudio={toggleAudio}
+      />
+      <div className="collapsible-header" onClick={() => setIsExpanded(!isExpanded)}>
+        <h4>Your Sessions</h4>
+        <span>{isExpanded ? "▲" : "▼"}</span>
+      </div>
+      {isExpanded && <LogContainer logs={logs} />}
+
+        <audio ref={audioRef} src={chimeSound} />
     </div>
   );
 }

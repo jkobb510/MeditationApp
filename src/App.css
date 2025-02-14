@@ -13,6 +13,39 @@ body {
     color: #fff;
 }
 
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  padding: 5px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+.collapsible-header h3 {
+  margin: 0;
+}
+
+.collapsible-header span {
+  font-size: 15px;
+}
+
+.collapsible-content {
+  padding: 10px;
+  background-color: #000000;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
+
+.top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -74,54 +107,17 @@ body {
     background-color: #fff;
     color: #000;
 }
-.icon-reset {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
 
-.icon-button {
-    width: 20px; /* Set consistent button width */
-    height: 20px; /* Set consistent button height */
-    padding: 0; /* Remove padding */
-}
-
-.icon-pause {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.icon{
-    width: 24px;
-    height: 24px;
-}
-.invert-button svg {
+.button-icon svg {
         fill: #fff; /* Default fill color */
         transition: fill 0.3s;
 }
-.invert-button:hover svg {
+.button-icon:hover svg {
         fill: #000; /* Inverted fill color */
 }
-.icon-button {
-    width: 66px; /* Set a consistent width */
-    height:50px; /* Set a consistent height */
-    padding: 0; /* Remove extra padding */
-}
 
-.icon-button svg {
-    fill: #fff; /* Default fill color */
-    transition: fill 0.3s;
-}
-
-.icon-button:hover svg {
-    fill: #000; /* Hover fill color */
-}
 #logContainer {
-    margin-top: 60px;
+    margin-top: 20px;
     color: white;
     width: 100%;
     display: flex;
