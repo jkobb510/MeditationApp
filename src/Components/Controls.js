@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import audioOnImg from "../audioOn.png";
-import audioOffImg from "../audioOff.png";
 import PlayIcon from "./PlayIcon";
 import PauseIcon from "./PauseIcon";
 

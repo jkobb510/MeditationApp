@@ -1,11 +1,13 @@
+// src/hooks/useWarning.js
 import { useState } from "react";
 
-export default function useWarning() {
+const useWarning = () => {
   const [warning, setWarning] = useState("");
 
-  const clearWarning = () => {
-    if (warning) setWarning("");
-  };
+  const clearWarning = () => setWarning("");
+  const setShortSessionWarning = () => setWarning("Session must be at least 1 minute to be logged.");
 
-  return { warning, setWarning, clearWarning };
-}
+  return { warning, clearWarning, setShortSessionWarning };
+};
+
+export default useWarning;

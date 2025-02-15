@@ -8,14 +8,19 @@ import useLogs from "./hooks/useLogs";
 import chimeSound from "./chalicechime-65472.mp3";
 import audioOnImg from "./audioOn.png";
 import audioOffImg from "./audioOff.png";
-
+import useWarning from "./hooks/useWarning";
+import useAudio from "./hooks/useAudio";
 function App() {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs();
-  const [isAudioOn, setIsAudioOn] = useState(true);
-  const [pendingUnmute, setPendingUnmute] = useState(false); // Track pending unmute state
+  const { isAudioOn, toggleAudio, resetAudio } = useAudio(audioRef, isRunning);
   const [isExpanded, setIsExpanded] = useState(false);
+  const { warning, clearWarning, setShortSessionWarning } = useWarning();
 
+  const handleStartPause = () => {
+    clearWarning();``
+    startPauseTimer();
+  };
   const handleLogSession = () => {
     if (time >= 60) {
       saveLog(time);
@@ -24,36 +29,24 @@ function App() {
     return false;
   };
 
-  const toggleAudio = () => {
-    setIsAudioOn((prevIsAudioOn) => {
-      const newIsAudioOn = !prevIsAudioOn;
-      if (audioRef.current) {
-        if (!newIsAudioOn) {
-          audioRef.current.muted = true;
-          setPendingUnmute(false);
-        } else if (isRunning) {
-          setPendingUnmute(true);
-        } else {
-          audioRef.current.muted = false;
-        }
-      }
-      return newIsAudioOn;
-    });
-  };
 
   const handleReset = () => {
-    resetTimer();
-    if (pendingUnmute) {
-      setIsAudioOn(true);
-      if (audioRef.current) {
-        audioRef.current.muted = false;
-      }
-      setPendingUnmute(false);
+    if (warning) {
+      clearWarning(); // ✅ Clicking Reset again clears the warning
+    } else if (time >= 60) {  
+      saveLog(time);
+      clearWarning(); // ✅ Clears warning when saving valid session
+    } else {
+      setShortSessionWarning();
     }
+    resetTimer();
+    resetAudio();
   };
 
   return (
     <div className="container">
+    {warning && <p className="warning">{warning}</p>} 
+
       <div className="top-right">
         <button className="button-icon" onClick={toggleAudio}>
           <img src={isAudioOn ? audioOnImg : audioOffImg} alt="Toggle Sound" width="24" height="24" />
@@ -62,7 +55,7 @@ function App() {
       <TimerDisplay time={time} />
       <Controls
         isRunning={isRunning}
-        onStartPause={startPauseTimer}
+        onStartPause={handleStartPause}
         onReset={handleReset}
         onLogSession={handleLogSession}
         isAudioOn={isAudioOn}
