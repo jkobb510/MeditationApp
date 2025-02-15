@@ -28,6 +28,7 @@ function App() {
       clearWarning();
     } else if (time >= 60) { 
       const formattedTime = convertTime(time);
+      console.log("Converted Time:", formattedTime);
       saveLog(formattedTime);
       clearWarning();
     } else {
