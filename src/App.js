@@ -6,11 +6,10 @@ import TimerDisplay from "./Components/TimerDisplay";
 import useTimer from "./hooks/useTimer";
 import useLogs from "./hooks/useLogs";
 import chimeSound from "./chalicechime-65472.mp3";
-import audioOnImg from "./audioOn.png";
-import audioOffImg from "./audioOff.png";
 import useWarning from "./hooks/useWarning";
 import useAudio from "./hooks/useAudio";
 import convertTime from "./utils/convertTime";
+import ToggleAudio from "./Components/ToggleAudio";
 function App() {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs();
@@ -40,13 +39,12 @@ function App() {
 
   return (
     <div className="container">
-    {warning && <p className="warning">{warning}</p>} 
+    {warning && <p className="warning">{warning}</p>}
+    <div className="top-left">
+      <h4>Upward Meditation</h4>
 
-      <div className="top-right">
-        <button className="button-icon" onClick={toggleAudio}>
-          <img src={isAudioOn ? audioOnImg : audioOffImg} alt="Toggle Sound" width="24" height="24" />
-        </button>
-      </div>
+    </div>
+      <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
       <TimerDisplay time={time} />
       <Controls
         isRunning={isRunning}
@@ -54,7 +52,7 @@ function App() {
         onReset={handleReset}
       />
       <div className="collapsible-header" onClick={() => setIsExpanded(!isExpanded)}>
-        <h4>Your Sessions</h4>
+        <h5>Your Sessions</h5>
         <span>{isExpanded ? "▲" : "▼"}</span>
       </div>
       {isExpanded && <LogContainer logs={logs} />}
