@@ -1,6 +1,9 @@
 import React from 'react';
 
 const LogContainer = ({ logs }) => {
+  if (logs.length === 0) {
+    return <p style={{ marginTop: "20px" }}>You don't have any sessions yet</p>;
+  }
   return (
     <div id="logContainer">
       <table>
@@ -8,7 +11,7 @@ const LogContainer = ({ logs }) => {
           <tr>
             <th>Date</th>
             <th>Time</th>
-            <th>Time Recorded</th>
+            <th>Time Recorded (Min:Sec)</th>
           </tr>
         </thead>
         <tbody>

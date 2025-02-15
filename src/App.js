@@ -10,6 +10,7 @@ import audioOnImg from "./audioOn.png";
 import audioOffImg from "./audioOff.png";
 import useWarning from "./hooks/useWarning";
 import useAudio from "./hooks/useAudio";
+import convertTime from "./utils/convertTime";
 function App() {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs();
@@ -21,21 +22,15 @@ function App() {
     clearWarning();``
     startPauseTimer();
   };
-  const handleLogSession = () => {
-    if (time >= 60) {
-      saveLog(time);
-      return true;
-    }
-    return false;
-  };
 
 
   const handleReset = () => {
     if (warning) {
-      clearWarning(); // ✅ Clicking Reset again clears the warning
-    } else if (time >= 60) {  
-      saveLog(time);
-      clearWarning(); // ✅ Clears warning when saving valid session
+      clearWarning();
+    } else if (time >= 60) { 
+      const formattedTime = convertTime(time);
+      saveLog(formattedTime);
+      clearWarning();
     } else {
       setShortSessionWarning();
     }
@@ -57,9 +52,6 @@ function App() {
         isRunning={isRunning}
         onStartPause={handleStartPause}
         onReset={handleReset}
-        onLogSession={handleLogSession}
-        isAudioOn={isAudioOn}
-        toggleAudio={toggleAudio}
       />
       <div className="collapsible-header" onClick={() => setIsExpanded(!isExpanded)}>
         <h4>Your Sessions</h4>
