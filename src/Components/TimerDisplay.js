@@ -44,7 +44,7 @@ const TimerDisplay = ({ time, isRunning }) => {
       <div id="innerCircle">
         {display === 'bePresent' ? (
           <div className={animation}>
-            <span id="bePresent">Direct your attention to the present moment</span>
+            <span id="bePresent">Timer has been hidden for your benefit</span>
           </div>
         ) : (
           <div className={animation}>
