@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import LogContainer from "./Components/LogContainer";
-import Controls from "./Components/Controls";
+import Controls from "./Components/Buttons/StartStop/Controls";
 import TimerDisplay from "./Components/TimerDisplay";
 import useTimer from "./hooks/useTimer";
 import useLogs from "./hooks/useLogs";
@@ -9,8 +9,8 @@ import chimeSound from "./chalicechime-65472.mp3";
 import useWarning from "./hooks/useWarning";
 import useAudio from "./hooks/useAudio";
 import convertTime from "./utils/convertTime";
-import ToggleAudio from "./Components/ToggleAudio";
-import CollapsibleHeader from "./Components/CollapsibleHeader";
+import ToggleAudio from "./Components/Buttons/ToggleAudio";
+import Sessions from "./Components/Buttons/Sessions";
 function App() {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs();
@@ -48,7 +48,7 @@ function App() {
       <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
       <TimerDisplay time={time} isRunning={isRunning} />
       <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset}/>
-      <CollapsibleHeader isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
+      <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
       {isExpanded && <LogContainer logs={logs} />}
 
         <audio ref={audioRef} src={chimeSound} />

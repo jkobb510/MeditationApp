@@ -15,9 +15,9 @@ const useLogs = () => {
     if (timeParts.length === 3) {
     // "HH:MM:SS" format
       const [hours, minutes, seconds] = timeParts;
+      totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
     } else {
-      // "MM:SS" format
       const [minutes, seconds] = timeParts;
       totalSeconds = minutes * 60 + seconds;
     }

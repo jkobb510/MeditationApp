@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const CollapsibleHeader = ({ isExpanded, toggleExpand }) => {
+const Sessions = ({ isExpanded, toggleExpand }) => {
   return (
     <div className="collapsible-header" onClick={toggleExpand}>
       <h5>Your Sessions</h5>
@@ -10,9 +10,9 @@ const CollapsibleHeader = ({ isExpanded, toggleExpand }) => {
   );
 };
 
-CollapsibleHeader.propTypes = {
+Sessions.propTypes = {
   isExpanded: PropTypes.bool.isRequired,
   toggleExpand: PropTypes.func.isRequired,
 };
 
-export default CollapsibleHeader;
+export default Sessions;
