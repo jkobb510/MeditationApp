@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const TimerDisplay = ({ time }) => {
+const transitionDelay = 2500;
+const TimerDisplay = ({ time, isRunning }) => {
+  const [display, setDisplay] = useState('formatTime');
+  const [animation, setAnimation] = useState('fade-in');
+  const timerRef = useRef(null);
+
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    clearTimer();
+    if (isRunning && display === 'formatTime') {
+      setAnimation('fade-out');
+      timerRef.current = setTimeout(() => {
+        setDisplay('bePresent');
+        setAnimation('fade-in');
+      }, transitionDelay);
+    } else if (!isRunning && display === 'bePresent') {
+      setAnimation('fade-out');
+      timerRef.current = setTimeout(() => {
+        setDisplay('formatTime');
+        setAnimation('fade-in');
+      }, transitionDelay);
+    }
+
+    return clearTimer;
+  }, [isRunning, display]);
+
   const formatTime = () => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -11,7 +42,15 @@ const TimerDisplay = ({ time }) => {
   return (
     <div id="timerCircle">
       <div id="innerCircle">
-        <span id="time">{formatTime()}</span>
+        {display === 'bePresent' ? (
+          <div className={animation}>
+            <span id="bePresent">Direct your attention to the present moment</span>
+          </div>
+        ) : (
+          <div className={animation}>
+            <span id="time">{formatTime()}</span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -19,6 +58,7 @@ const TimerDisplay = ({ time }) => {
 
 TimerDisplay.propTypes = {
   time: PropTypes.number.isRequired,
+  isRunning: PropTypes.bool.isRequired,
 };
 
 export default TimerDisplay;

@@ -10,6 +10,7 @@ import useWarning from "./hooks/useWarning";
 import useAudio from "./hooks/useAudio";
 import convertTime from "./utils/convertTime";
 import ToggleAudio from "./Components/ToggleAudio";
+import CollapsibleHeader from "./Components/CollapsibleHeader";
 function App() {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs();
@@ -43,19 +44,11 @@ function App() {
     {warning && <p className="warning">{warning}</p>}
     <div className="top-left">
       <h4>Upward Meditation</h4>
-
     </div>
       <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
-      <TimerDisplay time={time} />
-      <Controls
-        isRunning={isRunning}
-        onStartPause={handleStartPause}
-        onReset={handleReset}
-      />
-      <div className="collapsible-header" onClick={() => setIsExpanded(!isExpanded)}>
-        <h5>Your Sessions</h5>
-        <span>{isExpanded ? "▲" : "▼"}</span>
-      </div>
+      <TimerDisplay time={time} isRunning={isRunning} />
+      <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset}/>
+      <CollapsibleHeader isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
       {isExpanded && <LogContainer logs={logs} />}
 
         <audio ref={audioRef} src={chimeSound} />
