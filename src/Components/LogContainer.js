@@ -10,15 +10,13 @@ const LogContainer = ({ logs }) => {
         <thead>
           <tr>
             <th>Date</th>
-            <th>Time</th>
-            <th>Time Recorded (Min:Sec)</th>
+            <th>Time Recorded (Hr:Min:Sec)</th>
           </tr>
         </thead>
         <tbody>
           {logs.map((log, index) => (
             <tr key={index}>
               <td>{log.date}</td>
-              <td>{log.time}</td>
               <td>{log.timeRecorded || '00:00' }</td>
             </tr>
           ))}

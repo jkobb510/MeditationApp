@@ -8,4 +8,4 @@ const clearLocalStorage = () => {
   console.log("Local storage cleared.");
 };
 
-clearLocalStorage();
+module.exports = clearLocalStorage;
