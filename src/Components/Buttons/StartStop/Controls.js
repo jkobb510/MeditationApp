@@ -8,8 +8,8 @@ const Controls = ({ isRunning, onStartPause, onReset }) => {
     <div className="controls">
       <ResetButton onReset={onReset} />
 
-      <button className="button-icon" onClick={onStartPause}>
-        {isRunning ? <PauseIcon /> : <PlayIcon />}
+      <button className="button-icon" onClick={onStartPause} aria-label={isRunning ? "Pause" : "Play"}>
+        {isRunning ? <PauseIcon data-testid="pause-icon" /> : <PlayIcon data-testid="play-icon" />}
       </button>
     </div>
   );
