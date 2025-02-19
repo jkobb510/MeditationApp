@@ -10,7 +10,7 @@ const LogContainer = ({ logs }) => {
         <thead>
           <tr>
             <th>Date</th>
-            <th>Time Recorded (Hr:Min:Sec)</th>
+            <th>Time Recorded</th>
           </tr>
         </thead>
         <tbody>

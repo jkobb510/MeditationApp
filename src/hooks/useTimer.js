@@ -55,7 +55,6 @@ const useTimer = () => {
   return {
     time,
     isRunning,
-    formattedTime,
     startPauseTimer,
     resetTimer,
     audioRef,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const transitionDelay = 2200;
+const transitionDelay = 2000;
 const TimerDisplay = ({ time, isRunning }) => {
   const [display, setDisplay] = useState('formatTime');
   const [animation, setAnimation] = useState('fade-in');
@@ -44,7 +44,7 @@ const TimerDisplay = ({ time, isRunning }) => {
       <div id="innerCircle">
         {display === 'bePresent' ? (
           <div className={animation}>
-            <span id="bePresent">Timer has been hidden for your benefit</span>
+            <span id="bePresent">Timer has been hidden to promote focus</span>
           </div>
         ) : (
           <div className={animation}>
