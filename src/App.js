@@ -19,7 +19,7 @@ function App() {
   const { warning, clearWarning, setShortSessionWarning } = useWarning();
 
   const handleStartPause = () => {
-    clearWarning();``
+    clearWarning();
     startPauseTimer();
   };
 
@@ -29,7 +29,6 @@ function App() {
       clearWarning();
     } else if (time >= 60) { 
       const formattedTime = convertTime(time);
-      console.log("Converted Time:", formattedTime);
       saveLog(formattedTime);
       clearWarning();
     } else {
@@ -50,8 +49,7 @@ function App() {
       <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset}/>
       <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
       {isExpanded && <LogContainer logs={logs} />}
-
-        <audio ref={audioRef} src={chimeSound} />
+      <audio ref={audioRef} src={chimeSound} />
     </div>
   );
 }
