@@ -11,6 +11,8 @@ import useAudio from "./hooks/useAudio";
 import convertTime from "./utils/convertTime";
 import ToggleAudio from "./Components/Buttons/ToggleAudio/ToggleAudio";
 import Sessions from "./Components/Buttons/Sessions/Sessions";
+import TimeGraph from "./Components/Buttons/Sessions/TimeGraph";
+
 function App() {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs();
@@ -48,7 +50,7 @@ function App() {
       <TimerDisplay time={time} isRunning={isRunning} />
       <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset}/>
       <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
-      {isExpanded && <LogContainer logs={logs} />}
+      {isExpanded && <TimeGraph logs={logs} />}
       <audio ref={audioRef} src={chimeSound} />
     </div>
   );
