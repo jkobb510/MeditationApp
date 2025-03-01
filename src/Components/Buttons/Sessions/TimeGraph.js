@@ -125,7 +125,7 @@ const TimeGraph = () => {
   }, [logs]);
 
   return (
-    <div style={{ width: "100%", height: 300, marginTop: 20 }}>
+    <div className="graph">
       <h5>Your Records This Week</h5>
       <canvas ref={chartRef}></canvas>
     </div>
