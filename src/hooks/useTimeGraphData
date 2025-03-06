@@ -1,0 +1,55 @@
+import { useMemo } from "react";
+import dayjs from "dayjs";
+
+const useTimeGraphData = (logs) => {
+  return useMemo(() => {
+    const today = dayjs();
+    const startOfWeek = today.startOf("week");
+    const endOfWeek = startOfWeek.add(6, "day");
+
+    const weekDates = [];
+    const fullDateMap = {};
+
+    for (let i = 0; i < 7; i++) {
+      const fullDate = startOfWeek.add(i, "day").format("M/D/YYYY");
+      const shortDate = startOfWeek.add(i, "day").format("M/D");
+      weekDates.push(shortDate);
+      fullDateMap[fullDate] = shortDate;
+    }
+
+    const timeByDate = logs.reduce((acc, { date, timeRecorded }) => {
+      if (!fullDateMap[date]) return acc;
+
+      if (!acc[date]) acc[date] = { totalSeconds: 0, displayFormat: "0m 0s" };
+
+      const timeParts = timeRecorded.match(/(\d+)m\s*(\d*)s?/);
+      if (timeParts) {
+        const minutes = parseInt(timeParts[1], 10) || 0;
+        const seconds = parseInt(timeParts[2] || "0", 10);
+        const totalSeconds = minutes * 60 + seconds;
+
+        acc[date].totalSeconds += totalSeconds;
+        const newMinutes = Math.floor(acc[date].totalSeconds / 60);
+        const newSeconds = acc[date].totalSeconds % 60;
+        acc[date].displayFormat = `${newMinutes}m ${newSeconds}s`;
+      }
+
+      return acc;
+    }, {});
+
+    const dataPoints = weekDates.map((shortDate) => {
+      const fullDate = Object.keys(fullDateMap).find(
+        (date) => fullDateMap[date] === shortDate
+      );
+      return (timeByDate[fullDate]?.totalSeconds || 0) / 60; // Convert to minutes
+    });
+
+    return {
+      weekDates,
+      dataPoints,
+      weekRange: `${startOfWeek.format("M/D/YYYY")} - ${endOfWeek.format("M/D/YYYY")}`,
+    };
+  }, [logs]);
+};
+
+export default useTimeGraphData;
