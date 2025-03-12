@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const transitionDelay = 2000;
+const transitionDelay = 1500;
 const TimerDisplay = ({ time, isRunning }) => {
   const [display, setDisplay] = useState('formatTime');
   const [animation, setAnimation] = useState('fade-in');
