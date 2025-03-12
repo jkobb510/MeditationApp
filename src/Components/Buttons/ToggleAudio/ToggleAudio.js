@@ -7,7 +7,7 @@ const ToggleAudio = ({ isAudioOn, toggleAudio }) => {
     return (
       <div className="top-right">
         <button className="button-icon" onClick={toggleAudio}>
-          <img src={isAudioOn ? audioOnImg : audioOffImg} alt="Toggle Sound" width="24" height="24" />
+          <img src={isAudioOn ? audioOnImg : audioOffImg} alt="Toggle Sound" width="22" height="22" />
         </button>
       </div>
     );

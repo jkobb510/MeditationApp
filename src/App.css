@@ -25,7 +25,7 @@ body {
 .collapsible-header {
   position: absolute;
   top: 2px;
-  right: 70px;
+  right: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,6 +64,10 @@ body {
   .warning {
     top: -100px;
   }
+  .collapsible-header {
+    right: 65px;
+    padding: 5px;
+  }
 }
 
 
@@ -84,8 +88,19 @@ body {
 
 .top-right {
   position: absolute;
-  top: 10px;
-  right: 20px;
+  top: 11px;
+  right: 10px;
+}
+
+.button-icon {
+    background-color: #e0e0e0;
+}
+.button-icon svg {
+        fill: #cfcfcf; /* Default fill color */
+        transition: fill 0.3s;
+}
+.button-icon:hover svg {
+        fill: #000; /* Inverted fill color */
 }
 .top-left {
   position: absolute;
@@ -102,7 +117,7 @@ body {
   padding: 20px;
   text-align: center;
   margin: 20px;
-  background-color: #111111;
+  background-color: inherit;
 }
 #timerCircle {
   width: 300px;
@@ -157,14 +172,6 @@ body {
 .controls button:hover {
     background-color: #a3a3a3;
     color: #000;
-}
-
-.button-icon svg {
-        fill: #cfcfcf; /* Default fill color */
-        transition: fill 0.3s;
-}
-.button-icon:hover svg {
-        fill: #000; /* Inverted fill color */
 }
 
 #logContainer {
