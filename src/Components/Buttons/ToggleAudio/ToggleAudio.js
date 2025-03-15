@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 
 const ToggleAudio = ({ isAudioOn, toggleAudio }) => {
     return (
-      <div className="top-right">
-        <button className="button-icon" onClick={toggleAudio}>
-          <img src={isAudioOn ? audioOnImg : audioOffImg} alt="Toggle Sound" width="22" height="22" />
+        <button className="button-icon-audio" onClick={toggleAudio}>
+          <img src={isAudioOn ? audioOnImg : audioOffImg} alt="Toggle Sound" width="19" height="19" />
         </button>
-      </div>
     );
 }
 ToggleAudio.propTypes = {

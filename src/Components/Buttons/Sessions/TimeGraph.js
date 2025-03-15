@@ -23,7 +23,7 @@ const TimeGraph = () => {
 
   return (
     <div className="graph">
-      <h5 style={{marginTop: 20, marginBottom: 20}}>Your Records This Week ({weekRange})</h5>
+      <h5 style={{marginTop: 20, marginBottom: 20}}>Your Records This Week({weekRange})</h5>
       <canvas ref={chartRef}></canvas>
     </div>
   );

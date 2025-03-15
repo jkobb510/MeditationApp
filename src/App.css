@@ -4,11 +4,11 @@
 }
 .fade-out {
   opacity: 0;
-  transition: opacity 1.5s ease-out;
+  transition: opacity 1s ease-out;
 
 }
 .fade-in{
-  opacity: 1.5;
+  opacity: 1;
   transition: opacity 1s ease-in;
 }
 
@@ -31,8 +31,10 @@ body {
   align-items: center;
   padding: 5px;
   cursor: pointer;
-  border: 1px solid #6c6c6c;
+  border: 1px solid #cfcfcf;
   margin-top: 10px;
+  height: 30px;
+  width: 120px;
 }
 .graph {
   position: absolute;
@@ -44,10 +46,14 @@ body {
   margin-right: 5px;
   padding-bottom: 60px;
   padding-right: 10px;
-  background-color: black;
   border: solid;
   border-color: grey;
+  background-color: #000 !important;
 }
+.graph canvas {
+  background-color: #000 !important;
+}
+
 
 @media (max-width: 500px) {
   .graph {
@@ -66,7 +72,6 @@ body {
   }
   .collapsible-header {
     right: 65px;
-    padding: 5px;
   }
 }
 
@@ -81,19 +86,37 @@ body {
 
 .collapsible-content {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #cfcfcf;
   border-top: none;
 }
 
-
-.top-right {
+.header-container {
+  display: flex;
+  align-items: center; /* Ensures vertical alignment */
+  justify-content: flex-end; /* Aligns items to the right */
   position: absolute;
-  top: 11px;
+  top: 10px; /* Adjust as needed */
   right: 10px;
+  gap: 10px; /* Space between elements */
+}
+
+
+.button-icon-audio {
+    position: absolute;
+    top: 11.5px;
+    right: 10px;
+    background-color: #242424;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+    border-color:#cfcfcf
 }
 
 .button-icon {
-    background-color: #e0e0e0;
+    background-color: #cfcfcf;
 }
 .button-icon svg {
         fill: #cfcfcf; /* Default fill color */

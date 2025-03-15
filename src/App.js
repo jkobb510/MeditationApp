@@ -36,16 +36,24 @@ function App() {
   };
 
   return (
-    <div className="container" onClick={handleContainerClick}>
-      <div className="top-left"><h4>Upward Meditation</h4></div>
-      <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
-      {warning && <div className="warning">{warning}</div>}
-      <TimerDisplay time={time} isRunning={isRunning} />
-      <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
-      <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
-      {isExpanded && <div ref={graphRef} onClick={(e) => e.stopPropagation()}><TimeGraph logs={logs} /></div>}
-      <audio ref={audioRef} src={chimeSound} />
+<div className="container" onClick={handleContainerClick}>
+  <div className="top-left"><h4>Upward Meditation</h4></div>
+  <div className="header-container">
+    <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
+    <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
+  </div> 
+  {isExpanded && (
+    <div ref={graphRef} onClick={(e) => e.stopPropagation()}>
+      <TimeGraph logs={logs} />
     </div>
+  )}
+<div style={{pointerEvents: isExpanded ? "none" : "auto", filter: isExpanded ? "blur(4px) brightness(0.7)" : "none"}}>
+  {warning && <div className="warning">{warning}</div>}
+  <TimerDisplay time={time} isRunning={isRunning} />
+  <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
+</div>
+  <audio ref={audioRef} src={chimeSound} />
+</div>
   );
 }
 

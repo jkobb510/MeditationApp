@@ -8,9 +8,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open",
+    "start:server": "node src/server/app.js",
     "build": "webpack",
-    "deploy": "npm run build && gh-pages -d dist",
-    "start:server": "node src/server/app.js"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "keywords": [],
   "author": "",

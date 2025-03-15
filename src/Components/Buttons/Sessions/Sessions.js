@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Sessions = ({ isExpanded, toggleExpand }) => {
   return (
     <div className="collapsible-header" onClick={toggleExpand}>
-      <h5>Your Sessions</h5>
+      <h5>Your Progress</h5>
       <span>{isExpanded ? "▲" : "▼"}</span>
     </div>
   );

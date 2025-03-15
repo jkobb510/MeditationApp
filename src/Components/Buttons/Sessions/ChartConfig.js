@@ -12,7 +12,7 @@ export const getChartConfig = (weekDates, dataPoints) => ({
         tension: 0.3,
         pointRadius: 4,
         pointBackgroundColor: "#82ca9d",
-        fill: false,
+        fill: true,
       },
     ],
   },
