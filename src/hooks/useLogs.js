@@ -6,25 +6,25 @@ const useLogs = () => {
     return JSON.parse(localStorage.getItem('sessionLogs')) || [];
   });
 
-  useEffect(() => {
-    let isMounted = true;
-    const savedLogs = JSON.parse(localStorage.getItem('sessionLogs')) || [];
-    fetch('http://localhost:5001/api/sessions')
-      .then((res) => res.json())
-      .then((serverLogs) => {
-        if (!isMounted) return;
-        const combinedLogs = mergeLogs(savedLogs, serverLogs);
-        setLogs(combinedLogs);
-        localStorage.setItem('sessionLogs', JSON.stringify(combinedLogs));
-      })
-      .catch((err) => {
-        console.warn('Failed to load sessions from server. Using local logs.', err);
-      });
+useEffect(() => {
+  let isMounted = true;
+  const savedLogs = JSON.parse(localStorage.getItem('sessionLogs')) || [];
+  fetch('http://localhost:5001/api/sessions')
+    .then((res) => res.json())
+    .then((serverLogs) => {
+      if (!isMounted) return;
+      const combinedLogs = mergeLogs(savedLogs, serverLogs);
+      setLogs(combinedLogs);
+      localStorage.setItem('sessionLogs', JSON.stringify(combinedLogs));
+    })
+    .catch((err) => {
+      console.warn('Failed to load sessions from server. Using local logs.', err);
+      if (isMounted) setLogs(savedLogs);
+    });
 
-    return () => {
-      isMounted = false; // Prevents setting state after unmount
-    };
-  }, []);
+  return () => { isMounted = false; };
+}, []);
+
 
   const saveLog = useCallback((formattedTime, username = 'jkobb510') => {
     const timeParts = formattedTime.split(':').map(Number);

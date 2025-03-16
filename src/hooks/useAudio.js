@@ -1,15 +1,21 @@
-// src/hooks/useAudio.js
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const useAudio = (audioRef, isRunning) => {
-  const [isAudioOn, setIsAudioOn] = useState(true);
+  const [isAudioOn, setIsAudioOn] = useState(() => {
+    const stored = localStorage.getItem("isAudioOn");
+    return stored !== null ? JSON.parse(stored) : true;
+  });
   const [pendingUnmute, setPendingUnmute] = useState(false);
 
+  useEffect(() => {
+    localStorage.setItem("isAudioOn", JSON.stringify(isAudioOn));
+  }, [isAudioOn]);
+
   const toggleAudio = () => {
-    setIsAudioOn((prevIsAudioOn) => {
-      const newIsAudioOn = !prevIsAudioOn;
+    setIsAudioOn((prev) => {
+      const newSetting = !prev;
       if (audioRef.current) {
-        if (!newIsAudioOn) {
+        if (!newSetting) {
           audioRef.current.muted = true;
           setPendingUnmute(false);
         } else if (isRunning) {
@@ -18,16 +24,14 @@ const useAudio = (audioRef, isRunning) => {
           audioRef.current.muted = false;
         }
       }
-      return newIsAudioOn;
+      return newSetting;
     });
   };
 
   const resetAudio = () => {
     if (pendingUnmute) {
       setIsAudioOn(true);
-      if (audioRef.current) {
-        audioRef.current.muted = false;
-      }
+      if (audioRef.current) audioRef.current.muted = false;
       setPendingUnmute(false);
     }
   };

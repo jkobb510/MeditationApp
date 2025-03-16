@@ -19,7 +19,6 @@ function App() {
   const [isExpanded, setIsExpanded] = useState(false);
   const { warning, clearWarning, setShortSessionWarning } = useWarning();
   const graphRef = useRef(null);
-
   const handleStartPause = () => { clearWarning(); startPauseTimer(); };
 
   const handleReset = () => {
@@ -47,7 +46,7 @@ function App() {
       <TimeGraph logs={logs} />
     </div>
   )}
-<div style={{pointerEvents: isExpanded ? "none" : "auto", filter: isExpanded ? "blur(4px) brightness(0.7)" : "none"}}>
+<div className={isExpanded ? "darkenAndBlur-expanded" : ""}>
   {warning && <div className="warning">{warning}</div>}
   <TimerDisplay time={time} isRunning={isRunning} />
   <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
