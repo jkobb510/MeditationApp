@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "homepage": "https://github.com/jkobb510/MeditationApp",
-  "proxy": "http://localhost:5001",
+  "proxy": "https://meditationapp-3rr7.onrender.com/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open",
