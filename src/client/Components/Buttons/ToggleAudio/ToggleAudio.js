@@ -1,5 +1,5 @@
-import audioOnImg from '../../../audioOn.png';
-import audioOffImg from '../../../audioOff.png';
+import audioOnImg from '../../../../audioOn.png';
+import audioOffImg from '../../../../audioOff.png';
 import React from 'react';
 import PropTypes from 'prop-types';
 
