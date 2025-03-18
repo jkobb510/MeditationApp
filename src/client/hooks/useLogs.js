@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-
+const API_BASE_URL = process.env.RENDER_API_URL || process.env.LOCALHOST;
 const useLogs = () => {
   const [logs, setLogs] = useState(() => {
     // Load from localStorage first
@@ -9,7 +9,7 @@ const useLogs = () => {
 useEffect(() => {
   let isMounted = true;
   const savedLogs = JSON.parse(localStorage.getItem('sessionLogs')) || [];
-  fetch('http://localhost:5001/api/sessions')
+  fetch(`${API_BASE_URL}/api/sessions`)
     .then((res) => res.json())
     .then((serverLogs) => {
       if (!isMounted) return;
@@ -46,7 +46,7 @@ useEffect(() => {
     setLogs(updatedLogs);
     localStorage.setItem('sessionLogs', JSON.stringify(updatedLogs));
 
-    fetch('http://localhost:5001/api/save-session', {
+    fetch(`${API_BASE_URL}/api/save-session`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newRecord),
