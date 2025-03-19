@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const sessionsRouter = require('./routes/sessions');
-import { API_BASE_URL, LOCALHOST } from './config';
+import { API_BASE_URL, LOCALHOST } from '../config';
 app.use(cors());
 
 app.use(express.json());
