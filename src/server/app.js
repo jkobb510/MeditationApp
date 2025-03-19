@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const sessionsRouter = require('./routes/sessions');
-
+import { API_BASE_URL, LOCALHOST } from './config';
 app.use(cors());
 
 app.use(express.json());
@@ -15,6 +15,6 @@ app.get('/', (req, res) => {
   res.send('Server is running!');
 });
 
-const PORT = process.env.LOCALHOST || process.env.RENDER_API_URL
+const PORT = API_BASE_URL || LOCALHOST;
 
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));

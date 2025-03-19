@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-const API_BASE_URL = process.env.RENDER_API_URL || process.env.LOCALHOST;
+import {API_BASE_URL} from '../../config';
 const useLogs = () => {
   const [logs, setLogs] = useState(() => {
     // Load from localStorage first
