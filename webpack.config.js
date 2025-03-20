@@ -1,5 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+const env = dotenv.config().parsed || process.env;
 
 module.exports = {
   entry: './src/index.js',
@@ -21,16 +25,16 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/, // Add this rule for CSS files
-        use: ['style-loader', 'css-loader'], // Process CSS with style-loader and css-loader
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
-                test: /\.(mp3|wav)$/, // Rule for audio files
-        type: 'asset/resource', // Use asset/resource for Webpack 5
+        test: /\.(mp3|wav)$/,
+        type: 'asset/resource',
         generator: {
-          filename: 'media/[name].[hash][ext]', // Output location and naming for audio files
+          filename: 'media/[name].[hash][ext]',
         },
-      }
+      },
     ],
   },
   resolve: {
@@ -39,6 +43,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(env),
     }),
   ],
   devServer: {

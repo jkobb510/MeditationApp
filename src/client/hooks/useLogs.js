@@ -1,30 +1,29 @@
 import { useState, useEffect, useCallback } from 'react';
-import {API_BASE_URL} from '../../config';
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5001';
+
 const useLogs = () => {
-  const [logs, setLogs] = useState(() => {
-    // Load from localStorage first
-    return JSON.parse(localStorage.getItem('sessionLogs')) || [];
-  });
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  let isMounted = true;
-  const savedLogs = JSON.parse(localStorage.getItem('sessionLogs')) || [];
-  fetch(`${API_BASE_URL}/api/sessions`)
-    .then((res) => res.json())
-    .then((serverLogs) => {
-      if (!isMounted) return;
-      const combinedLogs = mergeLogs(savedLogs, serverLogs);
-      setLogs(combinedLogs);
-      localStorage.setItem('sessionLogs', JSON.stringify(combinedLogs));
-    })
-    .catch((err) => {
-      console.warn('Failed to load sessions from server. Using local logs.', err);
-      if (isMounted) setLogs(savedLogs);
-    });
+  useEffect(() => {
+    let isMounted = true;
 
-  return () => { isMounted = false; };
-}, []);
+    fetch(`${API_BASE_URL}/api/sessions`)
+      .then((res) => res.json())
+      .then((serverLogs) => {
+        if (!isMounted || !Array.isArray(serverLogs)) return;
+        setLogs(serverLogs);
+      })
+      .catch((err) => {
+        console.warn('Failed to load sessions from server.', err);
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
 
+    return () => { isMounted = false; };
+  }, []);
 
   const saveLog = useCallback((formattedTime, username = 'jkobb510') => {
     const timeParts = formattedTime.split(':').map(Number);
@@ -32,7 +31,7 @@ useEffect(() => {
       ? timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2]
       : timeParts[0] * 60 + timeParts[1];
 
-    if (totalSeconds < 60) return; // Ignore logs under 1 min
+    if (totalSeconds < 60) return;
 
     const date = new Date();
     const newRecord = {
@@ -42,38 +41,18 @@ useEffect(() => {
       timeRecorded: formattedTime,
     };
 
-    const updatedLogs = [...logs, newRecord];
-    setLogs(updatedLogs);
-    localStorage.setItem('sessionLogs', JSON.stringify(updatedLogs));
+    setLogs((prevLogs) => [...prevLogs, newRecord]);
 
     fetch(`${API_BASE_URL}/api/save-session`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newRecord),
     }).catch((err) => {
-      console.warn('Failed to save session to server. Log saved locally.', err);
+      console.warn('Failed to save session to server.', err);
     });
-  }, [logs]);
-
-  return { logs, saveLog };
-};
-
-const mergeLogs = (localLogs, dbLogs) => {
-  if (!Array.isArray(dbLogs)) return localLogs; // Fallback if server response is invalid
-
-  const allLogs = [...localLogs, ...dbLogs];
-
-  // Remove duplicates based on date, time, and timeRecorded
-  return allLogs.reduce((acc, log) => {
-    if (!acc.some(item =>
-      item.date === log.date &&
-      item.time === log.time &&
-      item.timeRecorded === log.timeRecorded
-    )) {
-      acc.push(log);
-    }
-    return acc;
   }, []);
+
+  return { logs, saveLog, loading };
 };
 
 export default useLogs;

@@ -11,6 +11,13 @@ const useAudio = (audioRef, isRunning) => {
     localStorage.setItem("isAudioOn", JSON.stringify(isAudioOn));
   }, [isAudioOn]);
 
+  // Ensure audio element is muted/unmuted on mount
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = !isAudioOn;
+    }
+  }, [audioRef, isAudioOn]);
+
   const toggleAudio = () => {
     setIsAudioOn((prev) => {
       const newSetting = !prev;
