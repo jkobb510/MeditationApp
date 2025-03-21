@@ -12,9 +12,9 @@ const useTimer = () => {
       const newIsRunning = !prev;
 
       // Play audio only when starting the timer
-      if (newIsRunning && time === 0) {
+      if (newIsRunning) {
         setLastActiveTime(Date.now() - time * 1000);
-        audioRef.current?.play();
+        if (time === 0) audioRef.current?.play();
       }
 
       return newIsRunning;
