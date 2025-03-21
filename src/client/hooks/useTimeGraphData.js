@@ -17,23 +17,12 @@ const useTimeGraphData = (logs) => {
       fullDateMap[fullDate] = shortDate;
     }
 
-    const timeByDate = logs.reduce((acc, { date, timeRecorded }) => {
+    const timeByDate = logs.reduce((acc, { date, durationSeconds }) => {
       if (!fullDateMap[date]) return acc;
 
-      if (!acc[date]) acc[date] = { totalSeconds: 0, displayFormat: "0m 0s" };
+      if (!acc[date]) acc[date] = 0;
 
-      const timeParts = timeRecorded.match(/(\d+)m\s*(\d*)s?/);
-      if (timeParts) {
-        const minutes = parseInt(timeParts[1], 10) || 0;
-        const seconds = parseInt(timeParts[2] || "0", 10);
-        const totalSeconds = minutes * 60 + seconds;
-
-        acc[date].totalSeconds += totalSeconds;
-        const newMinutes = Math.floor(acc[date].totalSeconds / 60);
-        const newSeconds = acc[date].totalSeconds % 60;
-        acc[date].displayFormat = `${newMinutes}m ${newSeconds}s`;
-      }
-
+      acc[date] += durationSeconds;
       return acc;
     }, {});
 
@@ -41,7 +30,7 @@ const useTimeGraphData = (logs) => {
       const fullDate = Object.keys(fullDateMap).find(
         (date) => fullDateMap[date] === shortDate
       );
-      return (timeByDate[fullDate]?.totalSeconds || 0) / 60; // Convert to minutes
+      return (timeByDate[fullDate] || 0) / 60; // Convert to minutes
     });
 
     return {
