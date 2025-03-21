@@ -17,9 +17,14 @@ function App() {
   const { logs, saveLog } = useLogs();
   const { isAudioOn, toggleAudio, resetAudio } = useAudio(audioRef, isRunning);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [sessionStartTime, setSessionStartTime] = useState(null);
   const { warning, clearWarning, setShortSessionWarning } = useWarning();
   const graphRef = useRef(null);
-  const handleStartPause = () => { clearWarning(); startPauseTimer(); };
+  const handleStartPause = () => { 
+    clearWarning(); 
+    if (!isRunning) setSessionStartTime(Date.now());
+    startPauseTimer(); 
+  };
 
   const handleReset = () => {
     if (warning) clearWarning();
@@ -35,6 +40,7 @@ function App() {
 
     resetTimer();
     resetAudio();
+    setSessionStartTime(null);
   };
 
   const handleContainerClick = (e) => {
