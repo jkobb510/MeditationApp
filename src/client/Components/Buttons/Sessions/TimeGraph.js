@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import Chart from "chart.js/auto";
 import useLogs from "../../../hooks/useLogs";
-import useTimeGraphData from "../../../hooks/useTimeGraphData";
+import useTimeGraphData from "../../../hooks/useTimeGraphData.js";
 import { getChartConfig } from "./ChartConfig";
 
 const TimeGraph = () => {

@@ -7,7 +7,7 @@ router.post('/save-session', (req, res) => {
   const { username, date, time, timeRecorded } = req.body;
   
   const stmt = db.prepare(`
-    INSERT INTO sessions (username, date, time, timeRecorded) 
+    INSERT INTO sessions (username, date, time, timeRecorded, durationSeconds) 
     VALUES (?, ?, ?, ?)
   `);
 

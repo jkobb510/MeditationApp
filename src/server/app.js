@@ -12,6 +12,9 @@ const API_BASE_URL = process.env.RENDER_API_URL || `http://localhost:${PORT}`;
 console.log(`API Base URL: ${API_BASE_URL}`);
 console.log(`Running in ${NODE_ENV} mode on port ${PORT}`);
 
+// Debugging: Ensure sessionsRouter is loaded
+console.log('Sessions router loaded:', !!sessionsRouter);
+console.log('Registered API routes:', sessionsRouter.stack.map(r => r.route?.path));
 app.use(cors());
 app.use(express.json());
 

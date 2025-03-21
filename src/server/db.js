@@ -7,7 +7,7 @@ const dbPath =
     : path.resolve(__dirname, '../meditation.db');
 
 const db = new sqlite3.Database(dbPath);
-
+console.log(dbPath);
 db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS sessions (
