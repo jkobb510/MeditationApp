@@ -25,32 +25,31 @@ const useLogs = () => {
     return () => { isMounted = false; };
   }, []);
 
-  const saveLog = useCallback((formattedTime, username = 'jkobb510') => {
-    const timeParts = formattedTime.split(':').map(Number);
-    let totalSeconds = timeParts.length === 3
-      ? timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2]
-      : timeParts[0] * 60 + timeParts[1];
+const saveLog = useCallback((startTime, endTime = Date.now(), username = 'jkobb510') => {
+  const totalSeconds = Math.floor((endTime - startTime) / 1000);
 
-    if (totalSeconds < 60) return;
+  if (totalSeconds < 60) return;
 
-    const date = new Date();
-    const newRecord = {
-      username,
-      date: date.toLocaleDateString(),
-      time: date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
-      timeRecorded: formattedTime,
-    };
+  const date = new Date();
+  const newRecord = {
+    username,
+    date: date.toLocaleDateString(),
+    time: date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+    timeRecorded: new Date(totalSeconds * 1000).toISOString().substr(11, 8), // HH:mm:ss
+    durationSeconds: totalSeconds,
+  };
 
-    setLogs((prevLogs) => [...prevLogs, newRecord]);
+  setLogs((prevLogs) => [...prevLogs, newRecord]);
 
-    fetch(`${API_BASE_URL}/api/save-session`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRecord),
-    }).catch((err) => {
-      console.warn('Failed to save session to server.', err);
-    });
-  }, []);
+  fetch(`${API_BASE_URL}/api/save-session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newRecord),
+  }).catch((err) => {
+    console.warn('Failed to save session to server.', err);
+  });
+}, []);
+
 
   return { logs, saveLog, loading };
 };

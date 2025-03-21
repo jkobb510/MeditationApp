@@ -1,4 +1,5 @@
 import React from 'react';
+import convertTime from '../../../utils/convertTime';
 
 const LogContainer = ({ logs }) => {
   if (logs.length === 0) {
@@ -17,7 +18,7 @@ const LogContainer = ({ logs }) => {
           {logs.map((log, index) => (
             <tr key={index}>
               <td>{log.date}</td>
-              <td>{log.timeRecorded || '00:00' }</td>
+              <td>{log.durationSeconds ? convertTime(log.durationSeconds) : '—'}</td>
             </tr>
           ))}
         </tbody>

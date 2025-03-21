@@ -1,6 +1,12 @@
-// server/db.js
+const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./meditation.db');
+
+const dbPath =
+  process.env.NODE_ENV === 'production'
+    ? '/var/data/meditation.db'
+    : path.resolve(__dirname, '../meditation.db');
+
+const db = new sqlite3.Database(dbPath);
 
 db.serialize(() => {
   db.run(`
