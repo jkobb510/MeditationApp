@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/MeditationApp/', // Optional, useful for routing if needed
+    publicPath: '/MeditationApp/',
   },
   module: {
     rules: [
@@ -40,7 +40,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
-    new Dotenv({ systemvars: true }),
+    new Dotenv({ path: './.env.production', systemvars: true }),
   ],
   devServer: {
     static: {
