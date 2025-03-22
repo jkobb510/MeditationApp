@@ -9,8 +9,6 @@ const dbPath =
 const db = new sqlite3.Database(dbPath);
 console.log(dbPath);
 db.serialize(() => {
-  db.run(`DROP TABLE IF EXISTS sessions`);
-
   db.run(`
     CREATE TABLE IF NOT EXISTS sessions (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
