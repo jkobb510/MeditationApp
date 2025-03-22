@@ -4,8 +4,10 @@ const router = express.Router();
 const db = require('../db');
 
 router.post('/save-session', (req, res) => {
-  const { username, date, time, timeRecorded } = req.body;
-  
+  const { username, date, time, timeRecorded, durationSeconds } = req.body;
+  if (typeof durationSeconds !== 'number') {
+    return res.status(400).json({ error: 'Invalid or missing durationSeconds' });
+  }
   const stmt = db.prepare(`
     INSERT INTO sessions (username, date, time, timeRecorded, durationSeconds) 
     VALUES (?, ?, ?, ?, ?);
