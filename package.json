@@ -10,7 +10,7 @@
     "start": "webpack serve --open",
     "start:server": "NODE_ENV=development node src/server/app.js",
     "build": "webpack",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "NODE_ENV=production npm run build && gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
