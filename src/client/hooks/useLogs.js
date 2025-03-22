@@ -45,8 +45,12 @@ const saveLog = useCallback((startTime, endTime = Date.now(), username = 'jkobb5
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newRecord),
-  }).catch((err) => {
-    console.warn('Failed to save session to server.', err);
+  })
+    .then(() => fetch(`${API_BASE_URL}/api/sessions`))
+    .then((res) => res.json())
+    .then((updatedLogs) => setLogs(updatedLogs))
+    .catch((err) => {
+      console.warn('Failed to save session to server.', err);
   });
 }, []);
 
