@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/', // Optional, useful for routing if needed
+    publicPath: '/MeditationApp/', // Optional, useful for routing if needed
   },
   module: {
     rules: [
