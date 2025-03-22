@@ -15,9 +15,14 @@ console.log(`Running in ${NODE_ENV} mode on port ${PORT}`);
 // Debugging: Ensure sessionsRouter is loaded
 console.log('Sessions router loaded:', !!sessionsRouter);
 console.log('Registered API routes:', sessionsRouter.stack.map(r => r.route?.path));
+const cors = require('cors');
+
 app.use(cors({
   origin: 'https://jkobb510.github.io',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: false,
 }));
+
 app.use(express.json());
 
 const serverUrl = () => {
