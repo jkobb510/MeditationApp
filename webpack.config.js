@@ -1,15 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
-const dotenv = require('dotenv');
-
-const env = dotenv.config().parsed || process.env;
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/', // Optional, useful for routing if needed
   },
   module: {
     rules: [
@@ -41,12 +39,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(env),
-    }),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new Dotenv({ systemvars: true }),
   ],
   devServer: {
     static: {
@@ -54,5 +48,5 @@ module.exports = {
     },
     port: 3000,
   },
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
 };
