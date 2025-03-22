@@ -15,7 +15,7 @@ db.serialize(() => {
       username TEXT NOT NULL,
       date TEXT NOT NULL,
       time TEXT NOT NULL,
-      timeRecorded TEXT NOT NULL
+      timeRecorded TEXT NOT NULL,
       durationSeconds INTEGER NOT NULL
     )
   `);
