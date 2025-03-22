@@ -16,6 +16,7 @@ db.serialize(() => {
       date TEXT NOT NULL,
       time TEXT NOT NULL,
       timeRecorded TEXT NOT NULL
+      durationSeconds INTEGER NOT NULL
     )
   `);
 });
