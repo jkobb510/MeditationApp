@@ -32,8 +32,8 @@ function App() {
       const now = Date.now();
       const elapsed = sessionStartTime ? Math.floor((now - sessionStartTime) / 1000) : time;
 
-      if (elapsed >= 60) {
-        saveLog(elapsed); // store raw seconds
+      if (sessionStartTime) {
+        saveLog(sessionStartTime, Date.now()); // store raw seconds
       }
     }
     else setShortSessionWarning();
