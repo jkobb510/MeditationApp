@@ -2,6 +2,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+router.post('/delete-bad-sessions', (req, res) => {
+  db.run(
+    `DELETE FROM sessions WHERE timeRecorded LIKE '__:__:__'`,
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ success: true, deleted: this.changes });
+    }
+  );
+});
 
 router.post('/save-session', (req, res) => {
   const { username, date, time, timeRecorded, durationSeconds } = req.body;
