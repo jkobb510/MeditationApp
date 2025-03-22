@@ -8,10 +8,10 @@ router.post('/save-session', (req, res) => {
   
   const stmt = db.prepare(`
     INSERT INTO sessions (username, date, time, timeRecorded, durationSeconds) 
-    VALUES (?, ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?);
   `);
 
-  stmt.run(username, date, time, timeRecorded, function (err) {
+  stmt.run(username, date, time, timeRecorded, durationSeconds, function (err) {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
