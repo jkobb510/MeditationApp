@@ -27,6 +27,7 @@ const Login = ({ onLogin }) => {
         alignItems: 'center',
         margin: '0 auto',
         flexDirection: 'column',
+        transform: 'translateY(-50px)',
       }}
     >
     <img src={Logo} alt="Logo" style={{ width: 250, height: 250, marginBottom: 20 }} />
@@ -61,7 +62,7 @@ const Login = ({ onLogin }) => {
 
 const inputStyle = {
   width: '100%',
-  padding: '10px',
+  padding: '15px',
   margin: '10px 0',
   backgroundColor: '#0a0a0a',
   border: '1px solid #cfcfcf',
@@ -71,7 +72,7 @@ const inputStyle = {
 
 const buttonStyle = {
   width: '100%',
-  padding: '10px',
+  padding: '15px',
   marginTop: '10px',
   backgroundColor: '#cfcfcf',
   color: '#0a0a0a',
