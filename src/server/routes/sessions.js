@@ -1,23 +1,12 @@
-// server/routes/sessions.js
-const express = require('express');
-const router = express.Router();
-const db = require('../db');
-router.post('/delete-sessions', (req, res) => {
-  const { username } = req.body;
-
-  if (!username) return res.status(400).json({ error: 'Username is required' });
-
-  db.run(`DELETE FROM sessions WHERE username = ?`, [username], function (err) {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ success: true, deleted: this.changes });
-  });
-});
-
 router.post('/save-session', (req, res) => {
   const { username, date, time, timeRecorded, durationSeconds } = req.body;
+  console.log('Received session on server:', req.body);
+
   if (typeof durationSeconds !== 'number') {
+    console.warn('Invalid durationSeconds:', durationSeconds);
     return res.status(400).json({ error: 'Invalid or missing durationSeconds' });
   }
+
   const stmt = db.prepare(`
     INSERT INTO sessions (username, date, time, timeRecorded, durationSeconds) 
     VALUES (?, ?, ?, ?, ?);
@@ -25,23 +14,13 @@ router.post('/save-session', (req, res) => {
 
   stmt.run(username, date, time, timeRecorded, durationSeconds, function (err) {
     if (err) {
-      res.status(500).json({ error: err.message });
-      return;
+      console.error('Insert error:', err.message);
+      return res.status(500).json({ error: err.message });
     }
+
+    console.log(`Inserted session with ID ${this.lastID}`);
     res.json({ success: true, id: this.lastID });
   });
 
   stmt.finalize();
 });
-
-router.get('/sessions', (req, res) => {
-  db.all('SELECT * FROM sessions', (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json(rows);
-  });
-});
-
-module.exports = router;

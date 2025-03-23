@@ -1,6 +1,6 @@
 node_modules
 package-lock.json
-meditation.db
+src/meditation.db
 .env
 .env.*
 *.txt

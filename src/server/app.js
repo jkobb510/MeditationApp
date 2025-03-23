@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const sessionsRouter = require('./routes/sessions');
 require('dotenv').config();
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:5001', 'https://jkobb510.github.io'];
 
 const app = express();
 
@@ -17,9 +18,15 @@ console.log('Sessions router loaded:', !!sessionsRouter);
 console.log('Registered API routes:', sessionsRouter.stack.map(r => r.route?.path));
 
 app.use(cors({
-  origin: 'https://jkobb510.github.io',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl or Postman) or matching allowedOrigins
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed for this origin'));
+    }
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
-  credentials: false,
 }));
 
 app.use(express.json());

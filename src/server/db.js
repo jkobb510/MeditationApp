@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const dbPath =
   process.env.NODE_ENV === 'production'
     ? '/var/data/meditation.db'
-    : path.resolve(__dirname, '../meditation.db');
+    : path.resolve(__dirname, './meditation.db');
 
 const db = new sqlite3.Database(dbPath);
 console.log(dbPath);
