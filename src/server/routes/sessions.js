@@ -27,3 +27,5 @@ router.post('/save-session', (req, res) => {
 
   stmt.finalize();
 });
+
+module.exports = router;
