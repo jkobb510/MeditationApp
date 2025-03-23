@@ -1,3 +1,6 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../db');
 router.post('/save-session', (req, res) => {
   const { username, date, time, timeRecorded, durationSeconds } = req.body;
   console.log('Received session on server:', req.body);
