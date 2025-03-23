@@ -27,5 +27,15 @@ router.post('/save-session', (req, res) => {
 
   stmt.finalize();
 });
+router.get('/sessions', (req, res) => {
+  db.all('SELECT * FROM sessions', (err, rows) => {
+    if (err) {
+      console.error('DB read error:', err.message);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(rows);
+  });
+});
+
 
 module.exports = router;
