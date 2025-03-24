@@ -12,8 +12,9 @@ import useAudio from "./client/hooks/useAudio";
 import ToggleAudio from "./client/Components/Buttons/ToggleAudio/ToggleAudio";
 import Sessions from "./client/Components/Buttons/Sessions/Sessions";
 import TimeGraph from "./client/Components/Buttons/Sessions/TimeGraph";
+import { color } from "chart.js/helpers";
 
-function MainApp({ username }) {
+function MainApp({ username, onLogout}) {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs(username);
   const { isAudioOn, toggleAudio, resetAudio } = useAudio(audioRef, isRunning);
@@ -27,7 +28,17 @@ function MainApp({ username }) {
     if (!isRunning) setSessionStartTime(Date.now());
     startPauseTimer();
   };
-
+const logoutStyle = { //add hover effect
+position: 'absolute',
+  top: '10px',
+  backgroundColor: '#0a0a0a',
+  color: '#cfcfcf',
+  border: 'none',
+  padding: '6px 10px',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  fontSize: '12px',
+};
   const handleReset = () => {
     if (warning) clearWarning();
     else if (time >= 60) {
@@ -49,16 +60,19 @@ function MainApp({ username }) {
       <div className="top-left"><h4>Upward Meditation</h4></div>
       <div className="header-container">
         <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
-        <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
+        <button className="logout-button" onClick={onLogout}>Logout</button>
       </div>
       {isExpanded && (
         <div ref={graphRef} onClick={(e) => e.stopPropagation()}>
-          <TimeGraph logs={logs} />
+          <TimeGraph logs={logs} username={username} />
         </div>
       )}
       <div className={isExpanded ? "darkenAndBlur-expanded" : ""}>
         {warning && <div className="warning">{warning}</div>}
+        <div className="timer-wrapper">
+            <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
         <TimerDisplay time={time} isRunning={isRunning} />
+        </div>
         <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
       </div>
       <audio ref={audioRef} src={chimeSound} />

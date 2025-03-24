@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import graph from "../../../../chart-646.svg";
+import { color } from "chart.js/helpers";
 
 const Sessions = ({ isExpanded, toggleExpand }) => {
   return (
     <div className="collapsible-header" onClick={toggleExpand}>
-      <h5>Your Progress</h5>
-      <span>{isExpanded ? "▲" : "▼"}</span>
+      <span style={{ fontSize: 14 }}>Progress</span>
+      <img src={graph} alt="Graph Icon" width="12" height="12" style={{ marginBottom: 2, marginLeft: 2, filter: "invert(100%) brightness(100%)" }} />
     </div>
   );
 };

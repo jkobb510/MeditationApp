@@ -4,8 +4,8 @@ import useLogs from "../../../hooks/useLogs";
 import useTimeGraphData from "../../../hooks/useTimeGraphData.js";
 import { getChartConfig } from "./ChartConfig";
 
-const TimeGraph = () => {
-  const { logs, loading } = useLogs();
+const TimeGraph = ({username}) => {
+  const { logs, loading } = useLogs(username);
   const { weekDates, dataPoints, weekRange } = useTimeGraphData(logs);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
