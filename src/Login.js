@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import Logo from './Logo.png';
+import tooltip from './tooltip.svg';
+import { color } from 'chart.js/helpers';
+import Tooltip from './client/Tooltip';
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showWarning, setShowWarning] = useState(false);
+const [showTooltip, setShowTooltip] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,9 +20,18 @@ const Login = ({ onLogin }) => {
   };
 
   return (
+      <div style={{ position: 'relative', height: '100vh' }}>
+<Tooltip iconSrc={tooltip}>
+  You can login with any username and password. 
+  Username will be stored and used to record meditation time.
+</Tooltip>
+
+
+
     <div
       className="container"
       style={{
+        position: 'relative', // <== Add this line
         maxWidth: 400,
         width: '100%',
         height: '100vh',
@@ -57,6 +70,7 @@ const Login = ({ onLogin }) => {
         </button>
       </form>
     </div>
+    </div>
   );
 };
 
@@ -80,5 +94,6 @@ const buttonStyle = {
   borderRadius: '4px',
   cursor: 'pointer',
 };
+
 
 export default Login;
