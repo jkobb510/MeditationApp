@@ -17,7 +17,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(() => !!localStorage.getItem('usern
   setIsLoggedIn(false);
 };
 
-  return isLoggedIn ? <MainApp username={username} /> : <Login onLogin={handleLogin} />;
+  return username ? <MainApp username={username} onLogout={handleLogout} /> : <Login onLogin={handleLogin} />;
 }
 
 export default App;
