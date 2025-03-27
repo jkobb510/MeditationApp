@@ -31,7 +31,7 @@ function MainApp({ username, onLogout}) {
 
   const handleReset = () => {
     if (warning) clearWarning();
-    else if (time >= 10) {
+    else if (time > 0) {
       const now = Date.now();
       if (sessionStartTime) saveLog(sessionStartTime, now);
     } else setShortSessionWarning();
@@ -56,7 +56,7 @@ function MainApp({ username, onLogout}) {
     </div>
       {isExpanded && (
         <div ref={graphRef} onClick={(e) => e.stopPropagation()}>
-          <TimeGraph logs={logs} username={username} />
+          <TimeGraph logs={logs} username={username} onClose={() => setIsExpanded(false)} />
         </div>
       )}
       <div className={isExpanded ? "darkenAndBlur-expanded" : ""}>

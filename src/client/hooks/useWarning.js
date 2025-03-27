@@ -5,7 +5,7 @@ const useWarning = () => {
   const [warning, setWarning] = useState("");
 
   const clearWarning = () => setWarning("");
-  const setShortSessionWarning = () => setWarning("Session must be at least 10 seconds to be logged.");
+  const setShortSessionWarning = () => setWarning("");
 
   return { warning, clearWarning, setShortSessionWarning };
 };

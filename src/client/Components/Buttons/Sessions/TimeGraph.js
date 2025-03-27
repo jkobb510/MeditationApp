@@ -4,7 +4,7 @@ import useLogs from "../../../hooks/useLogs";
 import useTimeGraphData from "../../../hooks/useTimeGraphData.js";
 import { getChartConfig } from "./ChartConfig";
 
-const TimeGraph = ({username}) => {
+const TimeGraph = ({username, onClose}) => {
   const { logs, loading } = useLogs(username);
   const { weekDates, dataPoints, weekRange } = useTimeGraphData(logs);
   const chartRef = useRef(null);
@@ -26,6 +26,7 @@ const TimeGraph = ({username}) => {
 
   return (
     <div className="graph">
+      <button className="graph-close-button" onClick={onClose}>×</button>
       <h4 style={{ marginTop: 10 }}>This Week's Progress</h4>
       <span style={{ fontSize: 12, marginTop: 3, marginBottom: 20 }}>({weekRange})</span>
       <canvas ref={chartRef} />

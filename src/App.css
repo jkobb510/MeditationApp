@@ -292,3 +292,17 @@ body {
   position: relative;
 
 }
+.graph-close-button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  background: transparent;
+  border: none;
+  color: #636363;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+.graph-close-button:hover {
+  color: #8a8a8a;
+}

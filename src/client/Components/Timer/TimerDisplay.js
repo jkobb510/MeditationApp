@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 const transitionDelay = 1000;
 const TimerDisplay = ({ time, isRunning }) => {
-  const [display, setDisplay] = useState('formatTime');
-  const [animation, setAnimation] = useState('fade-in');
+  const [showBePresent, setShowBePresent] = useState(false);
+  const [fade, setFade] = useState('fade-in');
   const timerRef = useRef(null);
+  const firstRender = useRef(true);
 
   const clearTimer = () => {
     if (timerRef.current) {
@@ -15,23 +16,21 @@ const TimerDisplay = ({ time, isRunning }) => {
   };
 
   useEffect(() => {
-    clearTimer();
-    if (isRunning && display === 'formatTime') {
-      setAnimation('fade-out');
-      timerRef.current = setTimeout(() => {
-        setDisplay('bePresent');
-        setAnimation('fade-in');
-      }, transitionDelay);
-    } else if (!isRunning && display === 'bePresent') {
-      setAnimation('fade-out');
-      timerRef.current = setTimeout(() => {
-        setDisplay('formatTime');
-        setAnimation('fade-in');
-      }, transitionDelay);
+    if (firstRender.current) {
+      firstRender.current = false;
+      setShowBePresent(isRunning); // Set correct initial state
+      return; // Skip animation on first load
     }
+    clearTimer();
+    setFade('fade-out');
+
+    timerRef.current = setTimeout(() => {
+      setShowBePresent(isRunning);
+      setFade('fade-in');
+    }, transitionDelay);
 
     return clearTimer;
-  }, [isRunning, display]);
+  }, [isRunning]);
 
   const formatTime = () => {
     const minutes = Math.floor(time / 60);
@@ -42,19 +41,18 @@ const TimerDisplay = ({ time, isRunning }) => {
   return (
     <div id="timerCircle">
       <div id="innerCircle">
-        {display === 'bePresent' ? (
-          <div className={animation}>
+        <div className={fade}>
+          {showBePresent ? (
             <span id="bePresent">Timer has been hidden to promote focus</span>
-          </div>
-        ) : (
-          <div className={animation}>
+          ) : (
             <span id="time">{formatTime()}</span>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
 };
+
 
 TimerDisplay.propTypes = {
   time: PropTypes.number.isRequired,
