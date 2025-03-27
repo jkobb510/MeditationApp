@@ -166,18 +166,23 @@ body {
 
 .controls button {
     background-color: transparent;
-    border: 1px solid #fff;
-    color: #cfcfcf;
+    border: 1px solid #a3a3a3;
+    color: #a3a3a3;
     padding: 15px 20px;
     margin: 10px;
     cursor: pointer;
     border-radius: 50%;
 }
-
-.controls button:hover {
-    background-color: #a3a3a3;
-    color: #000;
+@media (hover: hover) and (pointer: fine) {
+  .controls button:hover {
+      background-color: #a3a3a3;
+      color: #000;
+  }
 }
+.controls button:focus {
+  outline: none;
+}
+
 .TimerButton {
     flex-direction: column;
     height: 35px;
@@ -189,14 +194,19 @@ body {
     font-size: 8px;
 }
 .button-icon {
-    background-color: #cfcfcf;
+    background-color: #a3a3a3;
 }
 .button-icon svg {
-        fill: #cfcfcf; /* Default fill color */
+        fill: #a3a3a3; /* Default fill color */
         transition: fill 0.3s;
 }
+@media (hover: hover) and (pointer: fine) {
 .button-icon:hover svg {
         fill: #000; /* Inverted fill color */
+}
+}
+.button-icon:focus svg {
+  outline: none;
 }
 .button-label {
   margin-top: 4px; /* Pushes the text down */
@@ -228,7 +238,7 @@ body {
   align-items: center;
   position: relative;
   font-size: 2rem;
-  color: #cfcfcf;
+  color: #a2a2a2;
   top: -40px;
   border: 5px solid rgba(255, 255, 255, 0.3); /* Keeps static border */
 }
@@ -254,7 +264,7 @@ body {
 }
 #bePresent {
     font-size: 13px;
-    color: #cfcfcf;
+    color: #a3a3a3;
 
 }
 

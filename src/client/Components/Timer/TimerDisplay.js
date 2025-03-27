@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const transitionDelay = 1000;
+const transitionDelay = 1200;
 const TimerDisplay = ({ time, isRunning }) => {
   const [showBePresent, setShowBePresent] = useState(false);
   const [fade, setFade] = useState('fade-in');
@@ -26,8 +26,10 @@ const TimerDisplay = ({ time, isRunning }) => {
 
     timerRef.current = setTimeout(() => {
       setShowBePresent(isRunning);
+      setTimeout(() => {
       setFade('fade-in');
-    }, transitionDelay);
+    }, 10);
+  },transitionDelay);
 
     return clearTimer;
   }, [isRunning]);
