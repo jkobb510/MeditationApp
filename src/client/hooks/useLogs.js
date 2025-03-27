@@ -28,7 +28,7 @@ const useLogs = (username) => {
     if (!username) return;
 
     const totalSeconds = Math.floor((endTime - startTime) / 1000);
-    if (totalSeconds < 60) return;
+    if (totalSeconds < 10) return;
 
     const date = new Date();
     const newRecord = {

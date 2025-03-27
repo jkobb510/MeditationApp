@@ -28,20 +28,10 @@ function MainApp({ username, onLogout}) {
     if (!isRunning) setSessionStartTime(Date.now());
     startPauseTimer();
   };
-const logoutStyle = { //add hover effect
-position: 'absolute',
-  top: '10px',
-  backgroundColor: '#0a0a0a',
-  color: '#cfcfcf',
-  border: 'none',
-  padding: '6px 10px',
-  borderRadius: '4px',
-  cursor: 'pointer',
-  fontSize: '12px',
-};
+
   const handleReset = () => {
     if (warning) clearWarning();
-    else if (time >= 60) {
+    else if (time >= 10) {
       const now = Date.now();
       if (sessionStartTime) saveLog(sessionStartTime, now);
     } else setShortSessionWarning();
@@ -57,11 +47,13 @@ position: 'absolute',
 
   return (
     <div className="container" onClick={handleContainerClick}>
+    <div className="navbar-bg">
       <div className="top-left"><h4>Upward Meditation</h4></div>
       <div className="header-container">
         <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
         <button className="logout-button" onClick={onLogout}>Logout</button>
       </div>
+    </div>
       {isExpanded && (
         <div ref={graphRef} onClick={(e) => e.stopPropagation()}>
           <TimeGraph logs={logs} username={username} />
