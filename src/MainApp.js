@@ -12,7 +12,7 @@ import useAudio from "./client/hooks/useAudio";
 import ToggleAudio from "./client/Components/Buttons/ToggleAudio/ToggleAudio";
 import Sessions from "./client/Components/Buttons/Sessions/Sessions";
 import TimeGraph from "./client/Components/Buttons/Sessions/TimeGraph";
-import { color } from "chart.js/helpers";
+import Logo from "./Logo_NoTitle.png";
 
 function MainApp({ username, onLogout}) {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
@@ -48,8 +48,11 @@ function MainApp({ username, onLogout}) {
   return (
     <div className="container" onClick={handleContainerClick}>
     <div className="navbar-bg">
-      <div className="top-left"><h4>Upward Meditation</h4></div>
+      <div className="top-left">
+        <h4 className="logo-text">Upward Meditation</h4>
+        </div>
       <div className="header-container">
+        <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
         <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
         <button className="logout-button" onClick={onLogout}>Logout</button>
       </div>
@@ -62,7 +65,6 @@ function MainApp({ username, onLogout}) {
       <div className={isExpanded ? "darkenAndBlur-expanded" : ""}>
         {warning && <div className="warning">{warning}</div>}
         <div className="timer-wrapper">
-            <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
         <TimerDisplay time={time} isRunning={isRunning} />
         </div>
         <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
