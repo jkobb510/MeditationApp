@@ -6,13 +6,14 @@ import Controls from "./client/Components/Buttons/StartStop/Controls";
 import TimerDisplay from "./client/Components/Timer/TimerDisplay";
 import useTimer from "./client/hooks/useTimer";
 import useLogs from "./client/hooks/useLogs";
-import chimeSound from "./chime1.mp3";
+import chimeSound from "./assets/chime1.mp3"; // Ensure you have a chime sound in your assets folder
 import useWarning from "./client/hooks/useWarning";
 import useAudio from "./client/hooks/useAudio";
 import ToggleAudio from "./client/Components/Buttons/ToggleAudio/ToggleAudio";
 import Sessions from "./client/Components/Buttons/Sessions/Sessions";
 import TimeGraph from "./client/Components/Buttons/Sessions/TimeGraph";
-import Logo from "./Logo_NoTitle.png";
+import About from "./client/Components/Buttons/About/About"; // Import the About component
+import { Tooltip } from "./client/Tooltip";
 
 function MainApp({ username, onLogout}) {
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
@@ -53,6 +54,7 @@ function MainApp({ username, onLogout}) {
         </div>
       <div className="header-container">
         <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
+        <About onClick={() => setIsExpanded(true)}/>
         <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
         <button className="logout-button" onClick={onLogout}>Logout</button>
       </div>
@@ -65,7 +67,7 @@ function MainApp({ username, onLogout}) {
       <div className={isExpanded ? "darkenAndBlur-expanded" : ""}>
         {warning && <div className="warning">{warning}</div>}
         <div className="timer-wrapper">
-        <TimerDisplay time={time} isRunning={isRunning} />
+        <TimerDisplay time={time} isRunning={isRunning} hideTimerWhenRunning={false} />
         </div>
         <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
       </div>

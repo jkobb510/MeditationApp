@@ -1,0 +1,30 @@
+/* Audio Button */
+.button-icon-audio {
+  background-color: transparent;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  border: 1px solid #797979;
+  cursor: pointer;
+}
+
+.button-icon-audio img {
+  width: 15px;
+  height: 15px;
+  margin-right: -1px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .button-icon-audio:hover {
+    background-color: #a3a3a3; /* Optional: Change background color on hover */
+    color: #0a0a0a; /* Change border color on hover */
+  }
+  }
+  @media (max-width: 600px) {
+  .button-icon-audio {
+    height: 35px;
+    width: 35px;
+  }
+}

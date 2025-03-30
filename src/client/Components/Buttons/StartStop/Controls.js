@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import PlayIcon from "./PlayIcon";
 import PauseIcon from "./PauseIcon";
 import ResetButton from "./ResetButton";
+import "./Controls.css"
 const Controls = ({ isRunning, onStartPause, onReset }) => {
   return (
     <div className="controls">

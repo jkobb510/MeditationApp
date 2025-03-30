@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Tooltip = ({ iconSrc, children, position = { top: '30px', right: '30px' }, iconSize = 20 }) => {
+const Tooltip = ({ iconSrc, children, position = { top: '20px', right: '20px' }, iconSize = 20 }) => {
   const [visible, setVisible] = useState(false);
 
   return (

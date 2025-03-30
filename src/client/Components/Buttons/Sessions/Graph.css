@@ -1,0 +1,108 @@
+.collapsible-graph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid #797979;
+  background-color: transparent;
+  border-radius: 5px;
+  height: 30px;
+  width: 85px;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.collapsible-graph h3 {
+  margin: 0;
+}
+
+.collapsible-graph span {
+  font-size: 15px;
+}
+@media (hover: hover) and (pointer: fine) {
+ .collapsible-graph:hover {
+    background-color: #a3a3a3;
+    color: #0a0a0a;
+  }
+ }
+ @media (max-width: 600px) {
+   .collapsible-graph {
+    width: 35px;
+    height: 35px;
+    border-radius: 20%;
+    padding: 0;
+  }
+
+  .collapsible-graph span {
+    display: none;
+  }
+
+  .collapsible-graph img {
+    margin-left: 0;
+  }
+}
+
+/* Graph dropdown content (if used) */
+.collapsible-content {
+  padding: 10px;
+  border: 1px solid #cfcfcf;
+  border-top: none;
+}
+
+.graph canvas {
+  margin-top: 10px;
+}
+
+.graph {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  margin-top: 90px;
+  margin-right: 5px;
+  padding-bottom: 60px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border: solid;
+  border-color: grey;
+  background-color: #000 !important;
+  border-radius: 2px;
+}
+.darkenAndBlur-expanded {
+  pointer-events: none;
+  filter: blur(100px) brightness(0);
+}
+
+
+@media (min-width: 600px) and (max-width: 1050px) {
+  .graph {
+    width: 500px;
+    height: 520px;
+  }
+}
+@media (max-width: 600px) {
+  .graph {
+    right: auto;
+    width: 90vw;
+    height: 95vw;
+  }
+
+}
+
+.graph-close-button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  background: transparent;
+  border: none;
+  color: #636363;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+.graph-close-button:hover {
+  color: #8a8a8a;
+}

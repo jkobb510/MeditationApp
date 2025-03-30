@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import Logo from './Logo.png';
-import tooltip from './tooltip.svg';
-import { color } from 'chart.js/helpers';
-import Tooltip from './client/Tooltip';
+import Logo from './assets/logo.png'; // Ensure you have a logo image in your assets folder
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,10 +18,6 @@ const [showTooltip, setShowTooltip] = useState(false);
 
   return (
       <div style={{ position: 'relative', height: '100vh' }}>
-<Tooltip iconSrc={tooltip}>
-  You can login with any username and password. 
-  Username will be stored and used to record meditation time.
-</Tooltip>
 
 
 

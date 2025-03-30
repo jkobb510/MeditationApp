@@ -3,6 +3,7 @@ import Chart from "chart.js/auto";
 import useLogs from "../../../hooks/useLogs";
 import useTimeGraphData from "../../../hooks/useTimeGraphData.js";
 import { getChartConfig } from "./ChartConfig";
+import "./Graph.css"
 
 const TimeGraph = ({username, onClose}) => {
   const { logs, loading } = useLogs(username);

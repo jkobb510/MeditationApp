@@ -1,5 +1,7 @@
-import audioOnImg from '../../../../audioOn.png';
-import audioOffImg from '../../../../audioOff.png';
+import audioOnImg from '../../../../assets/audioOn.png'; // Ensure you have this image in your assets folder
+import audioOffImg from '../../../../assets/audioOff.png';
+import "./Audio.css";
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

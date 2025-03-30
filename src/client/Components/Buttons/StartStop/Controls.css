@@ -1,0 +1,45 @@
+.controls button {
+  background-color: transparent;
+  border: 1px solid #a3a3a3;
+  color: #a3a3a3;
+  padding: 18px 23px;
+  margin: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+@media (hover: hover) and (pointer: fine) {
+  .controls button:hover {
+    background-color: #a3a3a3;
+    color: black;
+  }
+}
+.controls button:focus {
+  outline: none;
+}
+
+.TimerButton {
+  flex-direction: column;
+  height: 35px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color:hsl(0, 0%, 81%);
+  font-size: 8px;
+}
+
+.button-icon {
+  background-color: #a3a3a3;
+}
+.button-icon svg {
+  fill: #a3a3a3; /* Default fill color */
+  transition: fill 0.3s;
+}
+@media (hover: hover) and (pointer: fine) {
+.button-icon:hover svg {
+        fill: #000; /* Inverted fill color */
+}
+}
+.button-icon:focus svg {
+  outline: none;
+}

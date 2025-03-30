@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import "./Timer.css"; 
 
 const transitionDelay = 1500;
-const TimerDisplay = ({ time, isRunning }) => {
+const TimerDisplay = ({ time, isRunning, hideTimerWhenRunning = true }) => {
   const [showBePresent, setShowBePresent] = useState(false);
   const [fade, setFade] = useState('fade-in');
   const timerRef = useRef(null);
@@ -16,6 +17,10 @@ const TimerDisplay = ({ time, isRunning }) => {
   };
 
   useEffect(() => {
+    if (!hideTimerWhenRunning) {
+      setShowBePresent(false);
+      return;
+    }
     if (firstRender.current) {
       firstRender.current = false;
       setShowBePresent(isRunning); // Set correct initial state
@@ -32,7 +37,7 @@ const TimerDisplay = ({ time, isRunning }) => {
   },transitionDelay);
 
     return clearTimer;
-  }, [isRunning]);
+  }, [isRunning, hideTimerWhenRunning]);
 
   const formatTime = () => {
     const minutes = Math.floor(time / 60);
@@ -41,6 +46,7 @@ const TimerDisplay = ({ time, isRunning }) => {
   };
 
   return (
+  <div className="timer-wrapper">
     <div id="timerCircle">
       <div id="innerCircle">
         <div className={fade}>
@@ -52,6 +58,7 @@ const TimerDisplay = ({ time, isRunning }) => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 
@@ -59,6 +66,7 @@ const TimerDisplay = ({ time, isRunning }) => {
 TimerDisplay.propTypes = {
   time: PropTypes.number.isRequired,
   isRunning: PropTypes.bool.isRequired,
+  hideTimerWhenRunning: PropTypes.bool, // Optional prop to control visibility when running
 };
 
 export default TimerDisplay;

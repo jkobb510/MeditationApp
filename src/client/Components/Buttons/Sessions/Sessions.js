@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import "./Graph.css"
 const Sessions = ({ isExpanded, toggleExpand }) => {
   return (
-    <div className="collapsible-header" onClick={toggleExpand}>
+    <div className="collapsible-graph" onClick={toggleExpand}>
       <span style={{ fontSize: 14, marginRight: 2 }}>Progress</span>
       <svg
         width="14"
         height="14"
         viewBox="0 0 256 256"
         fill="currentColor"
-        style={{ marginBottom: 2, marginLeft: 1 }}
+        style={{ marginBottom: 2, marginLeft: 0 }}
         xmlns="http://www.w3.org/2000/svg"
       >
         <g transform="translate(1.41 1.41) scale(2.81 2.81)">

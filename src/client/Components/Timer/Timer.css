@@ -1,0 +1,41 @@
+.timer-wrapper {
+  position: relative;
+  display: inline-block;
+}
+#timerCircle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 3px solid rgba(255, 255, 255, 0.3); /* Keeps static border */
+}
+
+#innerCircle {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#timerCircle span {
+  z-index: 1;
+}
+
+
+#time {
+    font-size: 42px;
+    font-family: 'Arial', sans-serif;
+    font-weight: 100;
+    color: #a3a3a3;
+}
+#bePresent {
+    font-size: 13px;
+    color: #a3a3a3;
+
+}
