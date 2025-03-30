@@ -53,11 +53,11 @@ body {
   z-index: 1;
   position: fixed;
   top: 8px;
-  right: 6px;
+  right: 2px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 5px;
   padding: 0 10px;
   background: transparent;
 }

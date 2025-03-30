@@ -1,5 +1,5 @@
-import audioOnImg from '../../../../assets/audioOn.png'; // Ensure you have this image in your assets folder
-import audioOffImg from '../../../../assets/audioOff.png';
+import audioOnImg from '../../../assets/audioOn.png'; // Ensure you have this image in your assets folder
+import audioOffImg from '../../../assets/audioOff.png';
 import "./Audio.css";
 
 import React from 'react';

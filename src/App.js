@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Login from './Login';
-import MainApp from './MainApp';
+import Login from './client/Login';
+import MainApp from './client/MainApp';
 
 function App() {
 const [username, setUsername] = useState(() => localStorage.getItem('username') || '');
