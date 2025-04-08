@@ -6,7 +6,7 @@
   "homepage": "https://jkobb510.github.io/MeditationApp",
   "proxy": "https://meditationapp-3rr7.onrender.com/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack serve --open",
     "start:server": "NODE_ENV=development node src/server/app.js",
     "build": "webpack",
@@ -40,9 +40,13 @@
     "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.3",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "style-loader": "^4.0.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

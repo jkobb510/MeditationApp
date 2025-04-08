@@ -7,7 +7,7 @@
   padding: 5px;
   border-radius: 5px;
   height: 30px;
-  width: 84px;
+  width: 85px;
   cursor: pointer;
   gap: 5px;
 }
@@ -105,4 +105,13 @@
 }
 .graph-close-button:hover {
   color: #8a8a8a;
+}
+.graph-icon{
+    display: inline;
+    vertical-align: middle;
+}
+@media (max-width: 600px) {
+  .graph-icon{
+    margin: 0;
+}
 }

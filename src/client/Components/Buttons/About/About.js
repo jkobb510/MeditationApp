@@ -39,7 +39,7 @@ export default function About() {
           <strong>Upward Meditation</strong><br /><br />
           A simple meditation tracker that counts up, not down.<br /><br />
           Sessions are saved and added to your daily total.<br /><br />
-          Tap <strong>the Progress</strong> button/icon to view your weekly stats.<br /><br />
+          Tap the<strong> Progress</strong> button/icon to view your weekly stats.<br /><br />
           More features coming soon!
         </p>
       </div>

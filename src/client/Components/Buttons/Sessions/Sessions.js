@@ -5,12 +5,12 @@ const Sessions = ({ isExpanded, toggleExpand }) => {
   return (
     <div className="collapsible-graph" onClick={toggleExpand}>
       <span style={{ fontSize: 14 }}>Progress</span>
+      <div className="graph-icon">
       <svg
         width="12"
         height="12"
         viewBox="0 0 256 256"
         fill="currentColor"
-        style={{ marginBottom: 3, marginLeft: -2 }}
         xmlns="http://www.w3.org/2000/svg"
       >
         <g transform="translate(1.41 1.41) scale(2.81 2.81)">
@@ -21,6 +21,7 @@ const Sessions = ({ isExpanded, toggleExpand }) => {
           <path d="M 22.937 46.567 L 11.051 58.453 c -0.298 0.298 -0.621 0.562 -0.959 0.8 V 87.25 c 0 1.519 1.231 2.75 2.75 2.75 h 8.782 c 1.519 0 2.75 -1.231 2.75 -2.75 V 48.004 L 22.937 46.567 z" />
         </g>
       </svg>
+      </div>
     </div>
   );
 };

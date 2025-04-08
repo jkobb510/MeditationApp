@@ -17,7 +17,7 @@ body {
     justify-content: center;
     align-items: center;
     max-height: 100%;
-    background-color: #0a0a0a;
+    background: radial-gradient(circle at center, #0a0a0a 70%, #000 100%);
     color: #cfcfcf;
     overflow-y: scroll;
 }
@@ -40,11 +40,14 @@ body {
   left: 15px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .logo-text {
     display: block;
     font-size: 14px;
     margin-left: -5px;
+  }
+  .navbar-bg {
+    height: 50px;
   }
 
 }
@@ -53,7 +56,7 @@ body {
   z-index: 1;
   position: fixed;
   top: 8px;
-  right: 2px;
+  right: 0px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
