@@ -36,7 +36,9 @@ const [showTooltip, setShowTooltip] = useState(false);
         transform: 'translateY(-50px)',
       }}
     >
-    <img src={Logo} alt="Logo" style={{ width: 250, height: 250, marginBottom: 20 }} />
+<div style={{ width: 250, height: 230, overflow: 'hidden', marginBottom: 20 }}>
+  <img src={Logo} alt="Logo" style={{ width: 250, height: 250, display: 'block' }} />
+</div>
 
       {showWarning && (
         <div style={{ color: '#ff6b6b', marginBottom: '10px', textAlign: 'center' }}>
@@ -68,7 +70,7 @@ const [showTooltip, setShowTooltip] = useState(false);
 };
 
 const inputStyle = {
-  width: '100%',
+  width: '80%',
   padding: '15px',
   margin: '10px 0',
   backgroundColor: '#0a0a0a',
@@ -78,7 +80,7 @@ const inputStyle = {
 };
 
 const buttonStyle = {
-  width: '100%',
+  width: '80%',
   padding: '15px',
   marginTop: '10px',
   backgroundColor: '#cfcfcf',

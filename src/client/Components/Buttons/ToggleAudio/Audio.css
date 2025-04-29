@@ -1,14 +1,16 @@
 /* Audio Button */
 .button-icon-audio {
   background-color: transparent;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20%;
   border: 1px solid #797979;
   cursor: pointer;
+  color: #cfcfcf;
+  margin-right: 10px;
 }
 
 .button-icon-audio img {
@@ -22,9 +24,3 @@
     color: #0a0a0a; /* Change border color on hover */
   }
   }
-  @media (max-width: 600px) {
-  .button-icon-audio {
-    height: 35px;
-    width: 35px;
-  }
-}

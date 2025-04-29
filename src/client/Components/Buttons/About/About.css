@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   height: 30px;
-  width: 75px;
+  width: 220px;
   border-radius: 6px;
   border: 1px solid #797979;
   cursor: pointer;
@@ -75,28 +75,12 @@
 .about-text {
   display: inline;
   vertical-align: middle;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 @media (max-width: 600px) {
-  .dropdown-wrapper {
-    width: 35px;
-    height: 35px;
-    border-radius: 20%;
-    padding: 0;
-  }
 
   .dropdown-panel {
     min-width: 80%;
-  }
-
-  .about-text {
-    display: none;
-  }
-  .about-icon {
-    align-items: center;
-    margin: 0;
-    width:17px;
-    height: 17px;
   }
 }

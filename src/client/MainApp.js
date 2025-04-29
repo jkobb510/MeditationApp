@@ -16,6 +16,7 @@ import About from "./Components/Buttons/About/About"; // Import the About compon
 import { Tooltip } from "./Tooltip";
 
 function MainApp({ username, onLogout}) {
+  const menuRef = useRef(null);
   const { time, isRunning, startPauseTimer, resetTimer, audioRef } = useTimer();
   const { logs, saveLog } = useLogs(username);
   const { isAudioOn, toggleAudio, resetAudio } = useAudio(audioRef, isRunning);
@@ -23,6 +24,7 @@ function MainApp({ username, onLogout}) {
   const [sessionStartTime, setSessionStartTime] = useState(null);
   const { warning, clearWarning, setShortSessionWarning } = useWarning();
   const graphRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleStartPause = () => {
     clearWarning();
@@ -42,20 +44,32 @@ function MainApp({ username, onLogout}) {
     setSessionStartTime(null);
   };
 
-  const handleContainerClick = (e) => {
-    if (isExpanded && graphRef.current && !graphRef.current.contains(e.target)) setIsExpanded(false);
-  };
+const handleContainerClick = (e) => {
+  if (isExpanded && graphRef.current && !graphRef.current.contains(e.target)) {
+    setIsExpanded(false);
+  }
+  if (isOpen && menuRef.current && !menuRef.current.contains(e.target)) {
+    setIsOpen(false);
+  }
+};
+
 
   return (
     <div className="container" onClick={handleContainerClick}>
     <div className="navbar-bg">
       <div className="top-left"><h4 className="logo-text">Upward Meditation</h4></div>
-      <div className="header-container">
-        <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
+        <div className="right-controls">
+
+      <ToggleAudio isAudioOn={isAudioOn} toggleAudio={toggleAudio} />
+      <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>☰</button>
+      </div>
+  {isOpen && (
+      <div className="header-container" ref={menuRef}>
         <About onClick={() => setIsExpanded(true)}/>
         <Sessions isExpanded={isExpanded} toggleExpand={() => setIsExpanded(!isExpanded)} />
         <button className="logout-button" onClick={onLogout}>Logout</button>
       </div>
+  )}
     </div>
       {isExpanded && (
         <div ref={graphRef} onClick={(e) => e.stopPropagation()}>

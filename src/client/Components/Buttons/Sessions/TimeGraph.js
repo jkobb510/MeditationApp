@@ -29,7 +29,7 @@ const TimeGraph = ({username, onClose}) => {
     <div className="graph">
       <button className="graph-close-button" onClick={onClose}>×</button>
       <h4 style={{ marginTop: 10 }}>This Week's Progress</h4>
-      <span style={{ fontSize: 12, marginTop: 3, marginBottom: 20 }}>({weekRange})</span>
+      <span style={{ fontSize: 16, marginTop: 3, marginBottom: 20 }}>({weekRange})</span>
       <canvas ref={chartRef} />
     </div>
   );

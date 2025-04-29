@@ -19,15 +19,14 @@ describe('useLogs', () => {
     });
 
     test('fetches logs on mount with valid username', async () => {
-    const mockLogs = [{ username: 'test', durationSeconds: 60 }];
-    fetch.mockResolvedValueOnce({ json: () => Promise.resolve(mockLogs) });
+      const mockLogs = [{ username: 'test', durationSeconds: 60 }];
+      fetch.mockResolvedValueOnce({ json: () => async () => mockLogs });
+      render(<TestComponent username="test" />);
 
-    render(<TestComponent username="test" />);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('logs').textContent).toBe(JSON.stringify(mockLogs));
-      expect(screen.getByTestId('loading').textContent).toBe('false');
-    });
+      await waitFor(() => {
+        expect(screen.getByTestId('logs').textContent).toBe(JSON.stringify(mockLogs));
+        expect(screen.getByTestId('loading').textContent).toBe('false');
+      });
     });
 });
 

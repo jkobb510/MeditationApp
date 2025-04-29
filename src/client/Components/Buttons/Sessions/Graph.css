@@ -7,7 +7,7 @@
   padding: 5px;
   border-radius: 5px;
   height: 30px;
-  width: 85px;
+  width: 220px;
   cursor: pointer;
   gap: 5px;
 }
@@ -17,7 +17,7 @@
 }
 
 .collapsible-graph span {
-  font-size: 15px;
+  font-size: 16px;
 }
 @media (hover: hover) and (pointer: fine) {
  .collapsible-graph:hover {
@@ -26,16 +26,8 @@
   }
  }
  @media (max-width: 600px) {
-   .collapsible-graph {
-    width: 35px;
-    height: 35px;
-    border-radius: 20%;
-    padding: 0;
-  }
 
-  .collapsible-graph span {
-    display: none;
-  }
+
 
   .collapsible-graph img {
     margin-left: 0;
@@ -111,7 +103,5 @@
     vertical-align: middle;
 }
 @media (max-width: 600px) {
-  .graph-icon{
-    margin: 0;
-}
+
 }

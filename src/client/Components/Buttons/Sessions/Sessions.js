@@ -4,7 +4,7 @@ import "./Graph.css"
 const Sessions = ({ isExpanded, toggleExpand }) => {
   return (
     <div className="collapsible-graph" onClick={toggleExpand}>
-      <span style={{ fontSize: 14 }}>Progress</span>
+      <span style={{ fontSize: 16 }}>Progress</span>
       <div className="graph-icon">
       <svg
         width="12"
