@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
-router.post('/save-session', (req, res) => {
+const pool = require('../db'); // pool from pg
+
+router.post('/save-session', async (req, res) => {
   const { username, date, time, timeRecorded, durationSeconds } = req.body;
   console.log('Received session on server:', req.body);
 
@@ -10,33 +11,32 @@ router.post('/save-session', (req, res) => {
     return res.status(400).json({ error: 'Invalid or missing durationSeconds' });
   }
 
-  const stmt = db.prepare(`
-    INSERT INTO sessions (username, date, time, timeRecorded, durationSeconds) 
-    VALUES (?, ?, ?, ?, ?);
-  `);
-
-  stmt.run(username, date, time, timeRecorded, durationSeconds, function (err) {
-    if (err) {
-      console.error('Insert error:', err.message);
-      return res.status(500).json({ error: err.message });
-    }
-
-    console.log(`Inserted session with ID ${this.lastID}`);
-    res.json({ success: true, id: this.lastID });
-  });
-
-  stmt.finalize();
+  try {
+    const result = await pool.query(
+      `INSERT INTO sessions (username, date, time, timeRecorded, durationSeconds) 
+       VALUES ($1, $2, $3, $4, $5) RETURNING id`,
+      [username, date, time, timeRecorded, durationSeconds]
+    );
+    res.json({ success: true, id: result.rows[0].id });
+  } catch (err) {
+    console.error('Insert error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
 });
-router.get('/sessions', (req, res) => {
+
+router.get('/sessions', async (req, res) => {
   const { username } = req.query;
   if (!username) return res.status(400).json({ error: 'Username required' });
 
-  db.all('SELECT * FROM sessions WHERE username = ?', [username], (err, rows) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json(rows);
-  });
+  try {
+    const result = await pool.query(
+      'SELECT * FROM sessions WHERE username = $1 ORDER BY date DESC',
+      [username]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
-
-
 
 module.exports = router;

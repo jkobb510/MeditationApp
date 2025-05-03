@@ -39,7 +39,7 @@ const useLogs = (username) => {
       durationSeconds: totalSeconds,
     };
 
-    setLogs((prev) => [...prev, newRecord]);
+    setLogs((prev) => (Array.isArray(prev) ? [...prev, newRecord] : [newRecord]));
 
     fetch(`${API_BASE_URL}/api/save-session`, {
       method: 'POST',

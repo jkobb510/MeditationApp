@@ -78,7 +78,7 @@ const handleContainerClick = (e) => {
       )}
       <div className={isExpanded ? "darkenAndBlur-expanded" : ""}>
         {warning && <div className="warning">{warning}</div>}
-        <TimerDisplay time={time} isRunning={isRunning} hideTimerWhenRunning={false} />
+        <TimerDisplay time={time} isRunning={isRunning} hideTimerWhenRunning={true} />
         <Controls isRunning={isRunning} onStartPause={handleStartPause} onReset={handleReset} />
       </div>
       <audio ref={audioRef} src={chimeSound} />

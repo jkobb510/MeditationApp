@@ -141,3 +141,7 @@ body {
   position: relative;
 
 }
+
+input::placeholder {
+  font-size: 16px;
+}

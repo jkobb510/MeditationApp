@@ -52,6 +52,7 @@ const [showTooltip, setShowTooltip] = useState(false);
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           style={inputStyle}
+          autocomplete="new-username"
         />
         <input
           type="password"
@@ -59,6 +60,7 @@ const [showTooltip, setShowTooltip] = useState(false);
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={inputStyle}
+          autocomplete="new-password"
         />
         <button type="submit" style={buttonStyle}>
           Login
@@ -77,6 +79,8 @@ const inputStyle = {
   border: '1px solid #cfcfcf',
   color: '#cfcfcf',
   borderRadius: '4px',
+  fontSize: '16px',
+  autocomplete: 'off',
 };
 
 const buttonStyle = {
