@@ -3,15 +3,13 @@ require('dotenv').config();
 
 let pool;
 
-if (process.env.NODE_ENV === 'production') {
-  // Production configuration
-  console.log('Using production database configuration');
-  console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
-  
+if (process.env.DATABASE_URL) {
+  // Production configuration - prioritize DATABASE_URL if it exists
+  console.log('Using production database configuration with DATABASE_URL');
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false // Required for some hosted PostgreSQL services
+      rejectUnauthorized: false
     }
   });
 } else {
@@ -31,12 +29,13 @@ pool.connect((err, client, release) => {
   if (err) {
     console.error('Error connecting to the database:', err.stack);
     console.error('Connection details:', {
+      nodeEnv: process.env.NODE_ENV,
+      hasDatabaseUrl: !!process.env.DATABASE_URL,
+      databaseUrlPrefix: process.env.DATABASE_URL ? process.env.DATABASE_URL.substring(0, 20) + '...' : 'not set',
       user: process.env.DB_USER,
       host: process.env.DB_HOST,
       database: process.env.DB_NAME,
-      port: process.env.DB_PORT,
-      hasDatabaseUrl: !!process.env.DATABASE_URL,
-      nodeEnv: process.env.NODE_ENV
+      port: process.env.DB_PORT
     });
   } else {
     console.log(`Successfully connected to PostgreSQL database in ${process.env.NODE_ENV || 'development'} mode`);
