@@ -18,11 +18,13 @@ const useTimeGraphData = (logs) => {
     }
 
     const timeByDate = logs.reduce((acc, { date, durationSeconds }) => {
-      if (!fullDateMap[date]) return acc;
+      const formattedDate = dayjs(date).format("M/D/YYYY"); // Normalize
 
-      if (!acc[date]) acc[date] = 0;
+      if (!fullDateMap[formattedDate]) return acc;
 
-      acc[date] += durationSeconds;
+      if (!acc[formattedDate]) acc[formattedDate] = 0;
+
+      acc[formattedDate] += durationSeconds;
       return acc;
     }, {});
 
