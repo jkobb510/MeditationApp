@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('../db'); // pool from pg
 
 router.post('/save-session', async (req, res) => {
-  const { username, date, time, timeRecorded, durationSeconds } = req.body;
+  const { username, date, time, durationSeconds } = req.body;
   console.log('Received session on server:', req.body);
 
   if (typeof durationSeconds !== 'number') {
@@ -14,8 +14,8 @@ router.post('/save-session', async (req, res) => {
   try {
     const result = await pool.query(
       `INSERT INTO sessions (username, date, time, timeRecorded, durationSeconds) 
-       VALUES ($1, $2, $3, $4, $5) RETURNING id`,
-      [username, date, time, timeRecorded, durationSeconds]
+       VALUES ($1, $2, $3, CURRENT_TIMESTAMP, $4) RETURNING id`,
+      [username, date, time, durationSeconds]
     );
     res.json({ success: true, id: result.rows[0].id });
   } catch (err) {
