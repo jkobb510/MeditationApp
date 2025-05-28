@@ -12,8 +12,16 @@ const useLogs = (username) => {
     fetch(`${API_BASE_URL}/api/sessions?username=${encodeURIComponent(username)}`)
       .then((res) => res.json())
       .then((serverLogs) => {
-        if (isMounted && Array.isArray(serverLogs)) setLogs(serverLogs);
+        if (isMounted && Array.isArray(serverLogs)) {
+          const normalized = serverLogs.map(log => ({
+            ...log,
+            durationSeconds: log.durationseconds,
+            timeRecorded: log.timerecorded
+          }));
+          setLogs(normalized);
+        }
       })
+      
       .catch((err) => {
         console.warn('Failed to load sessions from server.', err);
       })

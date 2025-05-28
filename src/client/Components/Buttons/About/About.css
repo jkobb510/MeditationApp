@@ -15,6 +15,7 @@
   color: #cfcfcf;
   border: none;
   cursor: pointer;
+  width: 220px;
 }
 
 .dropdown-wrapper:hover {

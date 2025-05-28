@@ -1,10 +1,12 @@
 import { useMemo } from "react";
 import dayjs from "dayjs";
-
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 const useTimeGraphData = (logs) => {
   return useMemo(() => {
-    const today = dayjs();
+    const today = dayjs().startOf("day");
     const startOfWeek = today.startOf("week");
+
     const endOfWeek = startOfWeek.add(6, "day");
 
     const weekDates = [];
@@ -18,7 +20,8 @@ const useTimeGraphData = (logs) => {
     }
 
     const timeByDate = logs.reduce((acc, { date, durationSeconds }) => {
-      const formattedDate = dayjs(date).format("M/D/YYYY"); // Normalize
+    const formattedDate = dayjs.utc(date).local().format("M/D/YYYY");
+    console.log({ formattedDate, isInRange: !!fullDateMap[formattedDate], durationSeconds });
 
       if (!fullDateMap[formattedDate]) return acc;
 

@@ -18,9 +18,9 @@ if (process.env.DATABASE_URL) {
   pool = new Pool({
     user: process.env.DB_USER || 'jkobb510',
     host: process.env.DB_HOST || 'localhost',
-    database: process.env.DB_NAME || 'upwardmeditation',
+    database: process.env.DB_NAME || 'meditationDB',
     password: process.env.DB_PASSWORD || 'ee5510',
-    port: process.env.DB_PORT || 5001,
+    port: process.env.DB_PORT || 5432
   });
 }
 
