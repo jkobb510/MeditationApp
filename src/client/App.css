@@ -74,6 +74,7 @@ body {
   border:#a3a3a3 1px solid;
   border-radius: 5px;
 }
+
 .hamburger {
   z-index: 1;
   position: fixed;
@@ -110,9 +111,9 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid #797979;
-  height: 30px;
+  height: 40px;
   font-size: 16px;
-  width: 220px;
+  width: 260px;
 }
 
 /* Hover Effects */
@@ -147,4 +148,20 @@ body {
 
 input::placeholder {
   font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    top: 60px;
+    right: 0px;
+    padding: 5px 5px;
+    gap: 2px;
+    border-radius: 3px;
+    width: 100%;
+  }
+  .logout-button {
+    width: 100%;
+    font-size: 16px;
+    height: 45px;
+  }
 }

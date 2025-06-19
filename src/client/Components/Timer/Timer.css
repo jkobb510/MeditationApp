@@ -3,20 +3,20 @@
   display: inline-block;
 }
 #timerCircle {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   border: 3px solid rgba(255, 255, 255, 0.3); /* Keeps static border */
-  margin-top: 50px;
+  margin-top: 30%;
 }
 
 #innerCircle {
-  width: 280px;
-  height: 280px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -39,4 +39,14 @@
     font-size: 16px;
     color: #a3a3a3;
 
+}
+@media (max-width: 600px) {
+  #timerCircle {
+    width: 300px;
+    height: 300px;
+  }
+  #innerCircle {
+    width: 250px;
+    height: 250px;
+  }
 }
