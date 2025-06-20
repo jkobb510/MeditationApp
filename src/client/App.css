@@ -10,6 +10,7 @@
 .fade-in{
   opacity: 1;
   transition: opacity 1s ease-in;
+  margin-top: 1px;
 }
 
 body {
