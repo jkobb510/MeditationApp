@@ -110,7 +110,6 @@ body {
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.2s ease;
   border: 1px solid #797979;
   height: 40px;
   font-size: 16px;
@@ -118,7 +117,7 @@ body {
 }
 
 /* Hover Effects */
-@media (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) and (max-width: 600px) {
   .logout-button:hover {
     background-color: #a3a3a3; /* Change background color on hover */
     color: #0a0a0a; /* Change text color on hover */

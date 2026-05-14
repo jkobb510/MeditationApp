@@ -12,6 +12,7 @@ import Sessions from "./Components/Buttons/Sessions/Sessions";
 import TimeGraph from "./Components/Buttons/Sessions/TimeGraph";
 import About from "./Components/Buttons/About/About";
 import { Tooltip } from "./Tooltip";
+import AboutModal from "./Components/Buttons/About/AboutModal";
 
 function MainApp({ username, onLogout }) {
   const menuRef = useRef(null);
@@ -87,15 +88,7 @@ function MainApp({ username, onLogout }) {
       )}
 
       {isAboutOpen && (
-<div className={`dropdown-panel ${isAboutOpen ? "show" : ""}`}>
-          <p>
-            <strong>Upward Meditation</strong><br /><br />
-            A simple meditation tracker that counts up, not down.<br /><br />
-            Sessions are saved and added to your daily total.<br /><br />
-            Tap the<strong> Progress</strong> button/icon to view your weekly stats.<br /><br />
-            More features coming soon!
-          </p>
-        </div>
+        <AboutModal onClose={() => setIsAboutOpen(false)} isAboutOpen={isAboutOpen} />
       )}
 
       <div className={isExpanded ? "darkenAndBlur-expanded" : ""}>
